@@ -1,0 +1,15 @@
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\bin\Debug\net7.0\DCR_verification.exe
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\bin\Debug\net7.0\DCR_verification.deps.json
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\bin\Debug\net7.0\DCR_verification.runtimeconfig.json
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\bin\Debug\net7.0\DCR_verification.dll
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\bin\Debug\net7.0\DCR_verification.pdb
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\DCR_verification.csproj.AssemblyReference.cache
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\DCR_verification.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\DCR_verification.AssemblyInfoInputs.cache
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\DCR_verification.AssemblyInfo.cs
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\DCR_verification.csproj.CoreCompileInputs.cache
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\DCR_verification.dll
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\refint\DCR_verification.dll
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\DCR_verification.pdb
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\DCR_verification.genruntimeconfig.cache
+C:\Users\chris\OneDrive\Dokumenter\GitHub\DCR-verification\DCR_verification\obj\Debug\net7.0\ref\DCR_verification.dll
