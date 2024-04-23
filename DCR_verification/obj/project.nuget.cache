@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "lXPgcKhSB5F60CmdK0j9u97VboaIALLILGSPjnL1CLOkC8+LfaYZgTkoNdIJrOXX514fdhdcWnso5LEqRCDKAQ==",
+  "dgSpecHash": "u9yfOgUkUPG8Ax0zFTsJoEwy1fcZGutibvZu2OQI6hVvTTOuDitPk2BQPhPBgiJGpnzAAXytTw7O+C+Qo9lPcA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
+  "projectFilePath": "/Users/amosweckstrom/Desktop/DCR-APP/DCR-verification/DCR_verification/DCR_verification.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\rohan\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.18\\microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
-    "C:\\Users\\rohan\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.18\\microsoft.windowsdesktop.app.ref.7.0.18.nupkg.sha512",
-    "C:\\Users\\rohan\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.18\\microsoft.aspnetcore.app.ref.7.0.18.nupkg.sha512",
-    "C:\\Users\\rohan\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.18\\microsoft.netcore.app.host.win-x64.7.0.18.nupkg.sha512"
+    "/Users/amosweckstrom/.nuget/packages/microsoft.netcore.app.ref/7.0.18/microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
+    "/Users/amosweckstrom/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.18/microsoft.aspnetcore.app.ref.7.0.18.nupkg.sha512",
+    "/Users/amosweckstrom/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.18/microsoft.netcore.app.host.osx-arm64.7.0.18.nupkg.sha512"
   ],
   "logs": []
 }
