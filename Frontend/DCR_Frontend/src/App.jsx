@@ -1,75 +1,32 @@
 import './App.css'
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Stage, Layer, Star, Text } from 'react-konva';
-
-function generateShapes() {
-  return [...Array(10)].map((_, i) => ({
-    id: i.toString(),
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    rotation: Math.random() * 180,
-    isDragging: false,
-  }));
-}
-
-const INITIAL_STATE = generateShapes();
+import { Stage, Layer,Rect} from 'react-konva';
+import GraphObject from './GraphElements/GraphObject';
+import Event from './GraphElements/Event';
+import Relation from './GraphElements/Relation';
 
 const App = () => {
-  const [stars, setStars] = React.useState(INITIAL_STATE);
 
-  const handleDragStart = (e) => {
-    const id = e.target.id();
-    setStars(
-      stars.map((star) => {
-        return {
-          ...star,
-          isDragging: star.id === id,
-        };
-      })
-    );
-  };
-  const handleDragEnd = (e) => {
-    setStars(
-      stars.map((star) => {
-        return {
-          ...star,
-          isDragging: false,
-        };
-      })
-    );
-  };
+
+  var graph = new GraphObject();
+  graph.addEvent([100, 100], [100, 100], "Event 1");
+  graph.addEvent([300, 300], [100, 100], "Event 2");
+  graph.addEvent([500, 500], [100, 100], "Event 3");
+  graph.addEvent([700, 700], [100, 100], "Bob");
+  graph.addRelation(graph.events[0], graph.events[1], "Relation 1");
+  graph.addRelation(graph.events[1], graph.events[2], "Relation 2");
+  graph.addRelation(graph.events[2], graph.events[3], "Relation 3");
+
 
   return (
+    <div className="App">
+    <h1>DCR Graph</h1>
     <Stage width={window.innerWidth} height={window.innerHeight}>
-      <Layer>
-        <Text text="Try to drag a star" />
-        {stars.map((star) => (
-          <Star
-            key={star.id}
-            id={star.id}
-            x={star.x}
-            y={star.y}
-            numPoints={5}
-            innerRadius={20}
-            outerRadius={40}
-            fill="#89b717"
-            opacity={0.8}
-            draggable
-            rotation={star.rotation}
-            shadowColor="black"
-            shadowBlur={10}
-            shadowOpacity={0.6}
-            shadowOffsetX={star.isDragging ? 10 : 5}
-            shadowOffsetY={star.isDragging ? 10 : 5}
-            scaleX={star.isDragging ? 1.2 : 1}
-            scaleY={star.isDragging ? 1.2 : 1}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-          />
-        ))}
-      </Layer>
+      {graph.render()}
     </Stage>
+    </div>
+    
   );
 };
 

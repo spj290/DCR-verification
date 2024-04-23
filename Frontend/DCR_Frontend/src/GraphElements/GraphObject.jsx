@@ -3,37 +3,27 @@ import {Rect, Text, Group, Layer} from "react-konva";
 import Event from './Event';
 import Relation from './Relation';
 
-class GraphObject extends React.Component {
+export default class GraphObject extends React.Component {
     constructor(props) {
         super(props);
+        this.events = [];
+        this.relations = [];
     }
-    state = {
-        events: [],
-        relations: []
-    };
+    addEvent(pos, size, label) {
+        this.events.push(<Event pos={pos} size={size} label={label}/>);
+    }
+    addRelation(fromEvent, toEvent, label) {
+        this.relations.push(<Relation fromEvent={fromEvent} toEvent={toEvent} label={label}/>);
+    }
     handleClick = () => {
-        // If blank space is clicked, show menu to add event or relation
-        
-
+        console.log("GraphObject clicked");
     }
-
-    addEvent = (pos, size, label) => {
-        var event = new Event({eventId: this.events.length + 1, pos: pos, size: size, label: label})
-        this.events.push(event)
-    }
-    addRelation = (fromEvent, toEvent, label) => {
-        var relation = new Relation({relationId: this.relations.length + 1, fromEvent: fromEvent, toEvent: toEvent, label: label})
-        this.relations.push(relation)
-    }
-
     render() {
         return (
             <Layer>
-                {this.events.map((event) => event.render())}
-                {this.relations.map((relation) => relation.render())}
+                {this.events}
+                {this.relations}
             </Layer>
-
         );
     }
-    }
-export default GraphObject;
+}
