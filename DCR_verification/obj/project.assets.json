@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\rohan\\.nuget\\packages\\": {}
+    "/Users/amosweckstrom/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
+      "projectUniqueName": "/Users/amosweckstrom/Desktop/DCR-APP/DCR-verification/DCR_verification/DCR_verification.csproj",
       "projectName": "DCR_verification",
-      "projectPath": "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
-      "packagesPath": "C:\\Users\\rohan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\obj\\",
+      "projectPath": "/Users/amosweckstrom/Desktop/DCR-APP/DCR-verification/DCR_verification/DCR_verification.csproj",
+      "packagesPath": "/Users/amosweckstrom/.nuget/packages/",
+      "outputPath": "/Users/amosweckstrom/Desktop/DCR-APP/DCR-verification/DCR_verification/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rohan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/amosweckstrom/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -65,15 +65,11 @@
             "version": "[7.0.18, 7.0.18]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
             "version": "[7.0.18, 7.0.18]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[7.0.18, 7.0.18]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
             "version": "[7.0.18, 7.0.18]"
           }
         ],
@@ -82,7 +78,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/RuntimeIdentifierGraph.json"
       }
     }
   }
