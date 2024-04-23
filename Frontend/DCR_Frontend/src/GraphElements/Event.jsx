@@ -1,13 +1,15 @@
 import React from "react";
-import { Rect } from "react-konva";
+import {Rect, Text, Group} from "react-konva";
 
 class Event extends React.Component {
   constructor(props) {
     super(props);
+    this.id = props.eventId;
     this.x = props.pos[0];
     this.y = props.pos[1];
     this.width = props.size[0];
     this.height = props.size[1];
+    this.label = props.label;
   }
   state = {
     color: "green",
@@ -19,16 +21,29 @@ class Event extends React.Component {
   };
   render() {
     return (
+      <Group
+      draggable
+      x={this.x}
+      y={this.y}
+      onClick={this.handleClick}
+    >
       <Rect
-        x={this.x}
-        y={this.y}
-        width={100}
-        height={100}
-        draggable={true}
+        width={this.width}
+        height={this.height}
         fill={this.state.color}
-        shadowBlur={10}
-        onClick={this.handleClick}
+
       />
+      <Text
+        text={this.label}
+        fontSize={15}
+        fill="white"
+        x={0}
+        y={this.height / 2 - 10}
+        width={this.width}
+        height={this.height}
+        align="center"
+      />
+    </Group>
     );
   }
 }
