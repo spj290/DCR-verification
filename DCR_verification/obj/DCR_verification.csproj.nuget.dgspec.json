@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\OneDrive\\Dokumenter\\GitHub\\DCR-verification\\DCR_verification\\DCR_verification.csproj": {}
+    "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\DCR_verification.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\OneDrive\\Dokumenter\\GitHub\\DCR-verification\\DCR_verification\\DCR_verification.csproj": {
+    "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\DCR_verification.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\OneDrive\\Dokumenter\\GitHub\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
+        "projectUniqueName": "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
         "projectName": "DCR_verification",
-        "projectPath": "C:\\Users\\chris\\OneDrive\\Dokumenter\\GitHub\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
-        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\OneDrive\\Dokumenter\\GitHub\\DCR-verification\\DCR_verification\\obj\\",
+        "projectPath": "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
+        "packagesPath": "C:\\Users\\rohan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\rohan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -32,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -48,12 +53,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.18, 7.0.18]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.18, 7.0.18]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.18, 7.0.18]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.18, 7.0.18]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
         }
       }
     }

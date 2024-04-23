@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "BvMG1gJSWDHOQN+77C+7svKSx0c9sv6JYxgWteTshXQE63cx0wKOgU81EtOKhygvut1TDCHV4UT8Umyxl1JMJw==",
+  "dgSpecHash": "lXPgcKhSB5F60CmdK0j9u97VboaIALLILGSPjnL1CLOkC8+LfaYZgTkoNdIJrOXX514fdhdcWnso5LEqRCDKAQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\chris\\OneDrive\\Dokumenter\\GitHub\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\rohan\\SEA\\DCR-verification\\DCR_verification\\DCR_verification.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rohan\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.18\\microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\rohan\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.18\\microsoft.windowsdesktop.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\rohan\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.18\\microsoft.aspnetcore.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\rohan\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.18\\microsoft.netcore.app.host.win-x64.7.0.18.nupkg.sha512"
+  ],
   "logs": []
 }
