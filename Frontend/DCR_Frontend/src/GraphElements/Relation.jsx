@@ -49,9 +49,9 @@ class Relation extends React.Component {
       <Text
         text={this.label}
         fontSize={15}
-        fill="white"
-        x={0}
-        y={this.height / 2 - 10}
+        fill="black"
+        x={this.points[0]+(this.points[2]-this.points[0])/2}
+        y={this.points[1] + (this.points[3] - this.points[1]) / 2}
         width={this.width}
         height={this.height}
         align="center"
