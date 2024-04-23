@@ -1,14 +1,14 @@
-import './App.css'
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Stage, Layer,Rect} from 'react-konva';
-import GraphObject from './GraphElements/GraphObject';
-import Event from './GraphElements/Event';
-import Relation from './GraphElements/Relation';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Stage, Layer, Rect } from "react-konva";
+import GraphObject from "./GraphElements/GraphObject";
+import Event from "./GraphElements/Event";
+import Relation from "./GraphElements/Relation";
+import Nav from "./Components/Navbar";
+import Navbar from "./Components/Navbar";
+import "./index.css";
 
 const App = () => {
-
-
   var graph = new GraphObject();
   graph.addEvent([100, 100], [100, 100], "Event 1");
   graph.addEvent([300, 300], [100, 100], "Event 2");
@@ -18,21 +18,18 @@ const App = () => {
   graph.addRelation(graph.events[1], graph.events[2], "Relation 2");
   graph.addRelation(graph.events[2], graph.events[3], "Relation 3");
 
-
   return (
     <div className="App">
-    <h1>DCR Graph</h1>
-    <Stage width={window.innerWidth} height={window.innerHeight}>
-      {graph.render()}
-    </Stage>
+      <Navbar />
+      <Stage width={window.innerWidth} height={window.innerHeight}>
+        {graph.render()}
+      </Stage>
     </div>
-    
   );
 };
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(<App />);
 
-
-export default App
+export default App;
