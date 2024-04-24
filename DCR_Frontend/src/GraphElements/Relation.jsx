@@ -1,9 +1,12 @@
 import React from "react";
 import { Arrow, Text, Group } from "react-konva";
 
+// Relation class component
 class Relation extends React.Component {
+  // Constructor for the Relation component
   constructor(props) {
     super(props);
+    // Assigning properties from props to local variables
     this.id = props.relationId;
     this.fromPos = props.fromEvent.props.pos;
     this.toPos = props.toEvent.props.pos;
@@ -11,12 +14,14 @@ class Relation extends React.Component {
     this.toWidth = props.toEvent.props.size[0];
     this.fromHeight = props.fromEvent.props.size[1];
     this.toHeight = props.toEvent.props.size[1];
+    // Calculating the points for the Arrow component
     this.points = [
       this.fromPos[0] + this.fromWidth,
       this.fromPos[1] + this.fromHeight / 2,
       this.toPos[0],
       this.toPos[1] + this.toHeight / 2,
     ];
+    // Adjusting the points if the fromPos is greater than the toPos
     if (this.fromPos[0] > this.toPos[0]) {
       this.points[2] = this.toPos[0] + this.toWidth;
       this.points[3] = this.toPos[1] + this.toHeight / 2;
@@ -29,15 +34,23 @@ class Relation extends React.Component {
     }
     this.label = props.label;
   }
+  
+  // Initial state of the component
   state = {
     color: "red",
   };
+
+  // Handler for click event
   handleClick = () => {
+    // Changing the state color to a random color
     this.setState({
       color: Konva.Util.getRandomColor(), //TODO replace with code for popup menu
     });
   };
+
+  // Render method for the component
   render() {
+    // Returning a Group component with an Arrow and Text child components
     return (
       <Group x={0} y={0} onDblClick={this.handleClick}>
         <Arrow
@@ -61,4 +74,5 @@ class Relation extends React.Component {
     );
   }
 }
+
 export default Relation;
