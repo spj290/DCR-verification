@@ -12,6 +12,9 @@ class Event extends React.Component {
     this.width = props.size[0];
     this.height = props.size[1];
     this.label = props.label;
+    if (props.onDragMove) {
+      this.onDragMove = props.onDragMove;
+    }
   }
 
   // Initial state of the component
@@ -27,6 +30,8 @@ class Event extends React.Component {
     });
   };
 
+  
+
   // Render method for the component
   render() {
     // Returning a Group component with a Rect and Text child components
@@ -36,6 +41,8 @@ class Event extends React.Component {
       x={this.x}
       y={this.y}
       onClick={this.handleClick}
+      // onDragMove={this.onDragMove}
+      onDragMove={() => console.log(this.x, this.y)}
     >
       <Rect
         width={this.width}
