@@ -28,6 +28,7 @@ export default function Navbar() {
       <div className="nav-spacer">
         {Object.keys(menuOptions).map((menu) => (
           <div
+            key={menu}
             className="menu"
             onMouseEnter={() => handleMouseEnter(menu)}
             onMouseLeave={handleMouseLeave}
