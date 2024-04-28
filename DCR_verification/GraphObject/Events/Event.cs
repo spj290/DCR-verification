@@ -28,4 +28,25 @@ public class Event: ICanvasObject {
     public void Render(){
         return;
     }
+
+    public void Enable(List<Event> events){
+        foreach (Relations.IRelation relation in inRelations) {
+            if (relation.GetType() == typeof(Relations.PreCondition)) {
+                int from = relation.fromEvent;
+                if (!events.Find(x => x.eventId == eventId).isExecuted) {
+                    return; 
+                }}}
+        isEnabled = true;
+    }
+
+    public void Execute(){
+        if (isEnabled) {
+            foreach (Relations.IRelation relation in outRelations) {
+                relation.Execute();
+            }
+            isExecuted = true;
+            isPending = false;
+         //   outRelations.ForEach(relation => relation.Execute());
+        } else {Console.WriteLine("Not Enabled");}
+    }
 }

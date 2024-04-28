@@ -8,10 +8,10 @@ namespace GraphObject;
 
 public class GraphObject{
     public int graphId {get; private set;}
-    
+  
     public string graphLabel {get; private set;}
     public List<Event> events {get; private set;}
-    private List<IRelation> relations {get; set;}
+    public List<IRelation> relations {get; private set;}
     
     /// <summary>
     /// GraphObject contructor
@@ -52,9 +52,10 @@ public class GraphObject{
     /// </summary>
     /// <param name="eventId">eventId to change</param>
     /// <param name="newEvent">new event</param>
-    public void EditEvent(int eventId, Event newEvent) {
+    public void EditEvent(int eventId, Event newEvent) { // TODO: need to keep eventID
         try {
-            // events.Find(x => x.eventId == eventId) = newEvent;
+            int index = events.FindIndex(x => x.eventId == eventId);
+            events[index] = newEvent;
         } catch {
             Console.WriteLine("event not found");
         }
@@ -74,8 +75,21 @@ public class GraphObject{
     /// </summary>
     /// <param name="relationId">relationId to change</param>
     /// <param name="newRelation">new relation</param>
-    public void EditRelation(int relationId, IRelation newRelation) {
-      // #TODO
-      return;
+    public void EditRelation(int relationId, IRelation newRelation) { 
+        // try {
+            Relations.IRelation relation = relations.Find(x => x.relationId == relationId);
+            int oldFrom = relation.fromEvent;
+            int oldTo = relation.toEvent;
+            events.Find(x => x.eventId == oldFrom).outRelations.Remove(relation);
+            events.Find(x => x.eventId == oldTo).inRelations.Remove(relation);
+            int newFrom = newRelation.fromEvent;
+            int newTo = newRelation.toEvent;
+            events.Find(x => x.eventId == newFrom).outRelations.Add(relation);
+            events.Find(x => x.eventId == newTo).inRelations.Add(relation);
+            string? relationText = newRelation.relationText;
+            relation.EditRelation(newFrom, newTo, relationText);
+        // } catch {
+        //     Console.WriteLine("relation not found");
+        // }
     }
 }

@@ -15,9 +15,22 @@ static class Program
         eventIdGenKey = 0;
         relationIdGenKey = 0;
         currentGraph = createGraph("Graph 1");
-        currentGraph.AddEvent(createEvent(0, 0, 100, 100, "Event 1"));
-        currentGraph.AddEvent(createEvent(0, 0, 100, 100, "Event 2"));
-        currentGraph.AddRelation(createRelation("PreCondition", 1, 2, "Relation 1"));
+        Events.Event event1 = createEvent(0, 0, 100, 100, "Event 1");
+        Events.Event event2 = createEvent(0, 0, 100, 100, "Event 2");
+        Events.Event event3 = createEvent(1,1,200,200, "Event 3");
+        currentGraph.AddEvent(event1);
+        currentGraph.AddEvent(event2);
+        Relations.IRelation relation1 = createRelation("PreCondition", 1, 2, "Relation 1");
+        Relations.IRelation relation2 = createRelation("PreCondition", 3, 2, "Relation 2");
+        currentGraph.AddRelation(relation1);
+        currentGraph.AddEvent(event3);
+        Console.WriteLine(currentGraph.relations[0].fromEvent);
+        currentGraph.EditRelation(relation1.relationId, relation2);
+        Console.WriteLine(currentGraph.relations[0].relationText);
+        // int index = currentGraph.events.FindIndex(x => x.eventId == event1.eventId);
+        // Console.WriteLine(currentGraph.events[index].eventLabel);
+        // currentGraph.EditEvent(event1.eventId, event3);
+        // Console.WriteLine(currentGraph.events[index].eventLabel);
         // simulator = new Simulator.Simulator();
         // tests = new Tests();
     }
