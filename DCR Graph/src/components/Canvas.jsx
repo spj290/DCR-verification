@@ -90,7 +90,6 @@ function Canvas({
         fromEvent: selectedEvent,
         toEvent: event,
         type: type,
-        id: crypto.randomUUID(),
       };
 
       setRelations([...relations, relation]);

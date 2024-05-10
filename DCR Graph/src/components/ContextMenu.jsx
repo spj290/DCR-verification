@@ -10,11 +10,9 @@ function ContextMenu({ contextMenu, addRelation, deleteEvent }) {
       }}
     >
       <div
-        onClick={() =>
-          addRelation(contextMenu.event, RELATION_TYPES.PRE_CONDITION)
-        }
+        onClick={() => addRelation(contextMenu.event, RELATION_TYPES.CONDITION)}
       >
-        Pre-condition
+        Condition
       </div>
       <div
         onClick={() => addRelation(contextMenu.event, RELATION_TYPES.RESPONSE)}
@@ -25,6 +23,16 @@ function ContextMenu({ contextMenu, addRelation, deleteEvent }) {
         onClick={() => addRelation(contextMenu.event, RELATION_TYPES.EXCLUDE)}
       >
         Exclude
+      </div>
+      <div
+        onClick={() => addRelation(contextMenu.event, RELATION_TYPES.INCLUDE)}
+      >
+        Include
+      </div>
+      <div
+        onClick={() => addRelation(contextMenu.event, RELATION_TYPES.MILESTONE)}
+      >
+        Milestone
       </div>
       <div onClick={() => deleteEvent(contextMenu.event)}>Delete</div>
     </div>

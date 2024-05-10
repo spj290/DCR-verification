@@ -4,11 +4,15 @@ import { RELATION_TYPES } from "../RelationTypes";
 function Relations({ relations, setArrowEndpoints }) {
   function setArrowEndpoints(fromEvent, toEvent, type) {
     const shift =
-      type === RELATION_TYPES.PRE_CONDITION
+      type === RELATION_TYPES.CONDITION
         ? 0
         : type === RELATION_TYPES.RESPONSE
         ? -5
-        : 5;
+        : type === RELATION_TYPES.INCLUDE
+        ? 5
+        : type === RELATION_TYPES.MILESTONE
+        ? -10
+        : 10;
 
     const eventWidth = 80;
     const eventHeight = 100;
@@ -34,10 +38,14 @@ function Relations({ relations, setArrowEndpoints }) {
     <>
       {relations.map((relation) => {
         const color =
-          relation.type === RELATION_TYPES.PRE_CONDITION
+          relation.type === RELATION_TYPES.CONDITION
             ? "orange"
             : relation.type === RELATION_TYPES.RESPONSE
             ? "blue"
+            : relation.type === RELATION_TYPES.INCLUDE
+            ? "green"
+            : relation.type === RELATION_TYPES.MILESTONE
+            ? "purple"
             : "red";
 
         return (
