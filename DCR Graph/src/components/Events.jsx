@@ -11,6 +11,7 @@ function Events({
     <>
       {events.map((event) => (
         <Group
+          key={event.id}
           x={event.position.x}
           y={event.position.y}
           draggable
