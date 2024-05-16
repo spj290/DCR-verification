@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 1fr 10vw;
+    grid-template-areas: "main right";
+  }
+
+.canvas {
+    background-color: azure;
+}
+
+.context-menu {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+.context-menu div {
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.context-menu div:hover {
+    background-color: #f0f0f0;
+}
+
+
+.right-sidebar {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.input-field {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.navbar {
+  background-color: #333;
+  padding: 10px;
+  height: 20px;
+}
+
+.navbar a {
+  color: white; 
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.simulator-events {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding:5px;
+  height: calc(100vh - 52px);
+}
+
+.event-list {
+  overflow-y: auto; 
+}
+
+.event-list div {
+  cursor: pointer;
+  word-wrap: break-word;
+  padding: 10px 5px;
+  border-bottom: 1px solid black;
+}
+
+.event-list div:hover {
+  background-color: lightgrey;
+}
+
+
+.simulation-check{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5vw;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.success {
+  background-color:green;
+}
+
+.failure {
+  background-color: red;
+}

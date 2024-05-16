@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DCR_verification")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be2a6e7a5709ef3c826def9211de2cc0b73c10c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("DCR_verification")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DCR_verification")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
