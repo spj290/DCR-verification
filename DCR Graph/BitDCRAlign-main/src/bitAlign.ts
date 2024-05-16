@@ -17,7 +17,7 @@ const alignCost: CostFun = (action, target) => {
     }
 }
 
-const execute = (event: Event, graph: BitLabelDCRPP) => {
+export const execute = (event: Event, graph: BitLabelDCRPP) => {
     const maskedEvent = graph.events.map[event];
     if (!graph.events.has(maskedEvent)) return; // OPEN WORLD PRINCIPLE
     if (graph.conditions.has(maskedEvent)) graph.marking.executed.add(maskedEvent);
@@ -41,7 +41,7 @@ const isEnabled = (event: Event, graph: BitDCRGraph): boolean => {
         graph.milestonesFor[event].copy().intersect(graph.marking.included.copy().intersect(graph.marking.pending)).isEmpty()
     )
 };
-const getEnabled = (graph: BitDCRGraph): Set<Event> => {
+export const getEnabled = (graph: BitDCRGraph): Set<Event> => {
     const executedOrExcluded = graph.marking.included.copy().compliment().union(graph.marking.executed);
     const pendingAndIncluded = graph.marking.pending.copy().intersect(graph.marking.included);
     const retSet = new Set<Event>();
