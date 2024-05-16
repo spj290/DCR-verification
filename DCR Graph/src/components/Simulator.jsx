@@ -24,8 +24,7 @@ function Simulator({ events, relations }) {
     );
     execute(event.id, graph);
 
-    setSimulatorState(
-      getEnabled(graph["BitDCRGraph"]) // BitLabelDCRPP -> BitDCRGraph
+    setSimulatorState({ enabledEvents: getEnabled(graph)} // BitLabelDCRPP -> BitDCRGraph
     );
     setTrace([...trace, { label: event.label, id: event.id }]);
   }
