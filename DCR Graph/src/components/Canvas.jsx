@@ -1,5 +1,5 @@
 import { Stage, Layer } from "react-konva";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Events from "./Events";
 import Relations from "./Relations";
 import ContextMenu from "./ContextMenu";
@@ -15,6 +15,61 @@ function Canvas({
   setRelations,
 }) {
   const [contextMenu, setContextMenu] = useState(null);
+  const [history, setHistory] = useState([]);
+  const [redoStack, setRedoStack] = useState([]);
+
+  // Function to save current state to history
+  const saveToHistory = (currentEvents, currentRelations) => {
+    setHistory((prevHistory) => [
+      ...prevHistory,
+      { events: currentEvents, relations: currentRelations },
+    ]);
+    setRedoStack([]); // Clear the redo stack whenever a new action is performed
+  };
+
+  // Undo function
+  const handleUndo = useCallback(() => {
+    if (history.length > 0) {
+      const lastState = history[history.length - 1];
+      setRedoStack((prevRedoStack) => [
+        { events, relations },
+        ...prevRedoStack,
+      ]);
+      setEvents(lastState.events);
+      setRelations(lastState.relations);
+      setHistory((prevHistory) => prevHistory.slice(0, -1));
+    }
+  }, [history, events, relations]);
+
+  // Redo function
+  const handleRedo = useCallback(() => {
+    if (redoStack.length > 0) {
+      const nextState = redoStack[0];
+      setHistory((prevHistory) => [...prevHistory, { events, relations }]);
+      setEvents(nextState.events);
+      setRelations(nextState.relations);
+      setRedoStack((prevRedoStack) => prevRedoStack.slice(1));
+    }
+  }, [redoStack, events, relations]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "z") {
+        e.preventDefault();
+        handleUndo();
+      } else if ((e.ctrlKey || e.metaKey) && e.key === "y") {
+        e.preventDefault();
+        handleRedo();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleUndo, handleRedo]);
 
   function addEvent(e) {
     e.evt.preventDefault();
@@ -33,10 +88,12 @@ function Canvas({
       id: crypto.randomUUID(),
       label: `Event${events.length + 1}`,
     };
+    saveToHistory(events, relations);
     setEvents([...events, event]);
   }
 
   function deleteEvent(eventToDelete) {
+    saveToHistory(events, relations);
     const updatedEvents = events.filter(
       (event) => event.id !== eventToDelete.id
     );
@@ -91,13 +148,15 @@ function Canvas({
         toEvent: event,
         type: type,
       };
-
+      saveToHistory(events, relations);
       setRelations([...relations, relation]);
     }
     setContextMenu(null);
   }
 
   function updateState(e, dragEvent) {
+    saveToHistory(events, relations);
+
     const updatedEvents = events.map((event) => {
       if (event.id === dragEvent.id) {
         const updatedEvent = {
