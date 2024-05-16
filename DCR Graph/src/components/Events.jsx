@@ -26,7 +26,7 @@ function Events({
           <Rect
             width={80}
             height={100}
-            fill="beige"
+            fill="#D6E6F2"
             stroke={selectedEventId === event.id ? "dodgerBlue" : "grey"}
             strokeWidth={selectedEventId === event.id ? 4 : 2}
           />
