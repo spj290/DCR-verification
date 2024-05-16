@@ -6,6 +6,8 @@ function Events({
   updateState,
   handleEventClick,
   handleEventRightClick,
+  handleDragEnd,
+  handleDragStart,
 }) {
   return (
     <>
@@ -18,6 +20,8 @@ function Events({
           onDragMove={(e) => updateState(e, event)}
           onClick={(e) => handleEventClick(e, event)}
           onContextMenu={(e) => handleEventRightClick(e, event)}
+          onDragStart={(e) => handleDragStart(e, event)}
+          onDragEnd={(e) => handleDragEnd(e, event)}
         >
           <Rect
             width={80}

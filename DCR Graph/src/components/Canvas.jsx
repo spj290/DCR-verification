@@ -155,8 +155,6 @@ function Canvas({
   }
 
   function updateState(e, dragEvent) {
-    saveToHistory(events, relations);
-
     const updatedEvents = events.map((event) => {
       if (event.id === dragEvent.id) {
         const updatedEvent = {
@@ -195,6 +193,10 @@ function Canvas({
     setEvents(updatedEvents);
     setRelations(updatedRelations);
   }
+  // New function to handle saving to history on drag end
+  function handleDragStartEnd() {
+    saveToHistory(events, relations); // Save current state to history only on drag end
+  }
 
   return (
     <>
@@ -212,6 +214,8 @@ function Canvas({
             updateState={updateState}
             handleEventClick={handleEventClick}
             handleEventRightClick={handleEventRightClick}
+            handleDragEnd={handleDragStartEnd}
+            handleDragStart={handleDragStartEnd}
           />
           <Relations relations={relations} />
         </Layer>
