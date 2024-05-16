@@ -22,6 +22,10 @@ public class Excludes : IRelation {
             relationText = newRelationText;
         }
     }
+
+    private void Enable(){
+        // todo: implement enable
+    }
     
     public void Execute(){
         //todo: implement execute
