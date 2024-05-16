@@ -1,3 +1,5 @@
+using Events;
+
 namespace Relations;
 
 public interface IRelation: ICanvasObject {
@@ -8,5 +10,5 @@ public interface IRelation: ICanvasObject {
     string? relationText {get;}
 
     void EditRelation(int newFromEvent, int newToEvent, string? newRelationText);
-    void Execute();
+    Event Execute(Event toEvent);
 }

@@ -36,6 +36,9 @@ public class Event: ICanvasObject {
                 if (!events.Find(x => x.eventId == eventId).isExecuted) {
                     return; 
                 }}}
+            if (!isIncluded) {
+                return;
+            }
         isEnabled = true;
     }
 

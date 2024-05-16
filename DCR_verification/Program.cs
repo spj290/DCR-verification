@@ -20,17 +20,19 @@ static class Program
         Events.Event event3 = createEvent(1,1,200,200, "Event 3");
         currentGraph.AddEvent(event1);
         currentGraph.AddEvent(event2);
-        Relations.IRelation relation1 = createRelation("PreCondition", 1, 2, "Relation 1");
-        Relations.IRelation relation2 = createRelation("PreCondition", 3, 2, "Relation 2");
-        currentGraph.AddRelation(relation1);
+
+        // Relations.IRelation relation1 = createRelation("PreCondition", 1, 2, "Relation 1");
+        // Relations.IRelation relation2 = createRelation("PreCondition", 3, 2, "Relation 2");
+        // currentGraph.AddRelation(relation1);
         currentGraph.AddEvent(event3);
-        Console.WriteLine(currentGraph.relations[0].fromEvent);
-        currentGraph.EditRelation(relation1.relationId, relation2);
-        Console.WriteLine(currentGraph.relations[0].relationText);
+        // Console.WriteLine(currentGraph.relations[0].fromEvent);
+        // currentGraph.EditRelation(relation1.relationId, relation2);
+        // Console.WriteLine(currentGraph.relations[0].relationText);
+
         // int index = currentGraph.events.FindIndex(x => x.eventId == event1.eventId);
-        // Console.WriteLine(currentGraph.events[index].eventLabel);
-        // currentGraph.EditEvent(event1.eventId, event3);
-        // Console.WriteLine(currentGraph.events[index].eventLabel);
+        Console.WriteLine(currentGraph.events[index].eventLabel);
+        currentGraph.EditEvent(event1.eventId, event3);
+        Console.WriteLine(currentGraph.events[index].eventLabel);
         // simulator = new Simulator.Simulator();
         // tests = new Tests();
     }

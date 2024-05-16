@@ -8,7 +8,6 @@ namespace GraphObject;
 
 public class GraphObject{
     public int graphId {get; private set;}
-  
     public string graphLabel {get; private set;}
     public List<Event> events {get; private set;}
     public List<IRelation> relations {get; private set;}
@@ -54,8 +53,12 @@ public class GraphObject{
     /// <param name="newEvent">new event</param>
     public void EditEvent(int eventId, Event newEvent) { // TODO: need to keep eventID
         try {
-            int index = events.FindIndex(x => x.eventId == eventId);
-            events[index] = newEvent;
+            Event e = events.Find(x => x.eventId == eventId);
+            e.isEnabled  = newEvent.isEnabled;
+            e.isExecuted = newEvent.isExecuted;
+            e.isIncluded = newEvent.isIncluded;
+            e.isPending  = newEvent.isPending;
+            // events[index] = newEvent;
         } catch {
             Console.WriteLine("event not found");
         }
@@ -90,6 +93,25 @@ public class GraphObject{
             relation.EditRelation(newFrom, newTo, relationText);
         // } catch {
         //     Console.WriteLine("relation not found");
+        // }
+    }
+
+    public void ExecuteRelation(int relationId) {
+      IRelation r = relations..Find(x => x.relationId);
+      int toEvent = r.toEvent;
+      Event e = events.Find(x => x.eventId == eventId);
+      EditEvent(toEvent, r.Execute(e));
+    }
+
+    public void ExecuteEvent(int EventId) {
+        // try {
+            int e = events.Find(x => x.eventId == eventId);
+            List<IRelation> outs = e.outRelations;
+            e.isExecuted = true;
+            e.isPending = false;
+            outs.ForEach(i => {ExecuteRelation(i);});
+        // } catch {
+        //     Console.WriteLine("event not found")
         // }
     }
 }
