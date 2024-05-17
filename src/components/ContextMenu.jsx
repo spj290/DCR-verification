@@ -1,6 +1,12 @@
 import { RELATION_TYPES } from "../RelationTypes";
 
-function ContextMenu({ contextMenu, addRelation, deleteEvent }) {
+function ContextMenu({
+    contextMenu,
+    addRelation,
+    udpateRelation,
+    deleteRelation,
+    deleteEvent,
+  }) {
   return (
     <div
       className="context-menu"
@@ -9,32 +15,30 @@ function ContextMenu({ contextMenu, addRelation, deleteEvent }) {
         top: contextMenu.position.y,
       }}
     >
-      <div
-        onClick={() => addRelation(contextMenu.event, RELATION_TYPES.CONDITION)}
-      >
-        Condition
+      {Object.values(RELATION_TYPES).map((type) => (
+        <div
+          key={type}
+          onClick={
+            // if contextMenu.event is not null, add relation
+            // else if contextMenu.relation is not null, update relation type
+            // else do nothing
+            contextMenu.event
+              ? () => addRelation(contextMenu.event, type)
+              : () => udpateRelation(contextMenu.relation, type)
+          }>
+          {type}
+        </div>
+      ))}
+      <div onClick={
+        // if contextMenu.relation is not null, delete relation
+        // else if contextMenu.event is not null, delete event
+        // else do nothing
+        contextMenu.relation
+          ? () => deleteRelation(contextMenu.relation)
+          : () => deleteEvent(contextMenu.event)
+      }>
+        Delete
       </div>
-      <div
-        onClick={() => addRelation(contextMenu.event, RELATION_TYPES.RESPONSE)}
-      >
-        Response
-      </div>
-      <div
-        onClick={() => addRelation(contextMenu.event, RELATION_TYPES.EXCLUDE)}
-      >
-        Exclude
-      </div>
-      <div
-        onClick={() => addRelation(contextMenu.event, RELATION_TYPES.INCLUDE)}
-      >
-        Include
-      </div>
-      <div
-        onClick={() => addRelation(contextMenu.event, RELATION_TYPES.MILESTONE)}
-      >
-        Milestone
-      </div>
-      <div onClick={() => deleteEvent(contextMenu.event)}>Delete</div>
     </div>
   );
 }
