@@ -125,6 +125,18 @@ function Canvas({
     }
   }
 
+  function handleRelationClick(e, relation) {
+    // create dropdown menu to change relation type or delete relation
+    e.evt.preventDefault();
+    e.cancelBubble = true;
+    
+    const position = {
+      x: e.target.getStage().getPointerPosition().x,
+      y: e.target.getStage().getPointerPosition().y,
+    };
+    setContextMenu({ relation: relation, position: position });
+  }
+
   function handleEventRightClick(e, event) {
     e.evt.preventDefault();
     e.cancelBubble = true;
@@ -153,6 +165,26 @@ function Canvas({
     }
     setContextMenu(null);
   }
+
+  function updateRelation(relation, type) {
+    saveToHistory(events, relations);
+    const updatedRelations = relations.map((rel) => {
+      if (rel.id === relation.id) {
+        return { ...rel, type: type };
+      }
+      return rel;
+    });
+    setRelations(updatedRelations);
+    setContextMenu(null);
+  }
+    function deleteRelation(relation) {
+      saveToHistory(events, relations);
+      const updatedRelations = relations.filter(
+        (rel) => rel.id !== relation.id
+      );
+      setRelations(updatedRelations);
+      setContextMenu(null);
+    }
 
   function updateState(e, dragEvent) {
     const updatedEvents = events.map((event) => {
@@ -217,7 +249,10 @@ function Canvas({
             handleDragEnd={handleDragStartEnd}
             handleDragStart={handleDragStartEnd}
           />
-          <Relations relations={relations} />
+          <Relations 
+          relations={relations}
+          handleRelationClick={handleRelationClick}
+          />
         </Layer>
       </Stage>
       {contextMenu && (
@@ -225,6 +260,8 @@ function Canvas({
           contextMenu={contextMenu}
           addRelation={addRelation}
           deleteEvent={deleteEvent}
+          udpateRelation={updateRelation}
+          deleteRelation={deleteRelation}
         />
       )}
     </>
