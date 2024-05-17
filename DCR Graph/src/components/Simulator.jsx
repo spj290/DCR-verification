@@ -17,16 +17,18 @@ function Simulator({ events, relations }) {
         ? new Set()
         : getEnabled(dcrToBitDCR(convertToDCRGraph(events, relations))),
   });
-
+  
   function eventClick(event) {
     const graph = bitGraphToGraphPP(
       bitDCRtoLabelDCR(dcrToBitDCR(simulatorState.currDCRGraph))
     );
     execute(event.id, graph);
 
-    setSimulatorState({ enabledEvents: getEnabled(graph)} // BitLabelDCRPP -> BitDCRGraph
+    // setSimulatorState({currDCRGraph:graph["BitDCRGraph"]})
+    setSimulatorState({enabledEvents:getEnabled(graph)} // BitLabelDCRPP -> BitDCRGraph
     );
     setTrace([...trace, { label: event.label, id: event.id }]);
+    console.log(simulatorState);
   }
 
   function convertToDCRGraph(events, relations) {

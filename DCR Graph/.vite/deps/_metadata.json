@@ -1,0 +1,43 @@
+{
+  "hash": "6c0ad255",
+  "configHash": "91bdd77d",
+  "lockfileHash": "f7131258",
+  "browserHash": "e82c8787",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "968d1e12",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "15d6f59f",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "2072fb25",
+      "needsInterop": false
+    },
+    "react-konva": {
+      "src": "../../node_modules/react-konva/es/ReactKonva.js",
+      "file": "react-konva.js",
+      "fileHash": "2b7f7df5",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-SHI443P2": {
+      "file": "chunk-SHI443P2.js"
+    },
+    "chunk-4QYA6MDS": {
+      "file": "chunk-4QYA6MDS.js"
+    },
+    "chunk-64MM4EP5": {
+      "file": "chunk-64MM4EP5.js"
+    }
+  }
+}
