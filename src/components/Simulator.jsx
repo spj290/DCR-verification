@@ -1,31 +1,42 @@
 import { useState } from "react";
 import checkAlignment from "../../BitDCRAlign-main/src/tdm";
+import { execute, getEnabled } from "../../BitDCRAlign-main/src/bitAlign";
+import {
+  bitDCRtoLabelDCR,
+  bitGraphToGraphPP,
+  dcrToBitDCR,
+} from "../../BitDCRAlign-main/src/utility";
 import { RELATION_TYPES } from "../RelationTypes";
 
 function Simulator({ events, relations }) {
   const [trace, setTrace] = useState([]);
-  const [simulationCheck, setsimulationCheck] = useState({
-    show: false,
-    message: "",
-    validSimulation: false,
+  const [simulatorState, setSimulatorState] = useState({
+    currDCRGraph: convertToDCRGraph(events, relations),
+    enabledEvents:
+      events.length == 0
+        ? new Set()
+        : getEnabled(dcrToBitDCR(convertToDCRGraph(events, relations))),
   });
-
+  
   function eventClick(event) {
+    const graph = bitGraphToGraphPP(
+      bitDCRtoLabelDCR(dcrToBitDCR(simulatorState.currDCRGraph))
+    );
+    execute(event.id, graph);
+
+    // setSimulatorState({currDCRGraph:graph["BitDCRGraph"]})
+    setSimulatorState({enabledEvents:getEnabled(graph)} // BitLabelDCRPP -> BitDCRGraph
+    );
     setTrace([...trace, { label: event.label, id: event.id }]);
+    console.log(simulatorState);
   }
 
-  function simulate() {
+  function convertToDCRGraph(events, relations) {
     const eventIdSet = new Set(
       events.map((event) => {
         return event.id;
       })
     );
-
-    const test = {
-      polarity: "+",
-      trace: trace.map((event) => event.id),
-      context: eventIdSet,
-    };
 
     const relationTypes = {
       conditionsFor: {},
@@ -55,7 +66,7 @@ function Simulator({ events, relations }) {
       );
     });
 
-    const model = {
+    return {
       events: eventIdSet,
       ...relationTypes,
       marking: {
@@ -64,19 +75,36 @@ function Simulator({ events, relations }) {
         pending: new Set(),
       },
     };
-
-    const validSimulation = checkAlignment(test, model, 10);
-
-    setsimulationCheck({
-      show: true,
-      message: validSimulation ? "Simulation successful" : "Simulation failed",
-      validSimulation: validSimulation,
-    });
-
-    setTimeout(() => {
-      setsimulationCheck({ show: false });
-    }, 3000);
   }
+
+  // function simulate() {
+  //   const eventIdSet = new Set(
+  //     events.map((event) => {
+  //       return event.id;
+  //     })
+  //   );
+
+  //   const test = {
+  //     polarity: "+",
+  //     trace: trace.map((event) => event.id),
+  //     context: eventIdSet,
+  //   };
+
+  //   const bitModelPP = bitGraphToGraphPP(
+  //     bitDCRtoLabelDCR(dcrToBitDCR(convertToDCRGraph()))
+  //   );
+  //   const validSimulation = checkAlignment(test, bitModelPP, 10);
+
+  //   setsimulationCheck({
+  //     show: true,
+  //     message: validSimulation ? "Simulation successful" : "Simulation failed",
+  //     validSimulation: validSimulation,
+  //   });
+
+  //   setTimeout(() => {
+  //     setsimulationCheck({ show: false });
+  //   }, 3000);
+  // }
 
   return (
     <div className="app">
@@ -89,14 +117,22 @@ function Simulator({ events, relations }) {
         <h3>Event Labels</h3>
         <div className="event-list">
           {events.map((event, index) => (
-            <div key={index} onClick={() => eventClick(event)}>
+            <div
+              key={index}
+              onClick={() => eventClick(event)}
+              style={{
+                color: simulatorState.enabledEvents.has(event.id)
+                  ? "green"
+                  : "red",
+              }}
+            >
               {event.label}
             </div>
           ))}
         </div>
-        <button onClick={simulate}>Simulate</button>
+        <button>Simulate</button>
       </div>
-      {simulationCheck.show && (
+      {/* {simulationCheck.show && (
         <div
           className={`simulation-check ${
             simulationCheck.validSimulation ? "success" : "failure"
@@ -104,7 +140,7 @@ function Simulator({ events, relations }) {
         >
           {simulationCheck.message}
         </div>
-      )}
+      )} */}
     </div>
   );
 }
