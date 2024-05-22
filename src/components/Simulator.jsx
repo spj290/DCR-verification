@@ -106,10 +106,6 @@ function Simulator({ events, relations }) {
   //   }, 3000);
   // }
 
-  function clearSimulation() {
-    setTrace([]);
-  }
-
   return (
     <div className="app">
       <div>
@@ -134,8 +130,7 @@ function Simulator({ events, relations }) {
             </div>
           ))}
         </div>
-        <button onClick={simulate}>Simulate</button>
-        <button onClick={clearSimulation}>Clear Simulation</button>
+        <button>Simulate</button>
       </div>
       {/* {simulationCheck.show && (
         <div
