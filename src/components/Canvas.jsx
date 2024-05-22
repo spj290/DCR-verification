@@ -60,6 +60,14 @@ function Canvas({
       } else if ((e.ctrlKey || e.metaKey) && e.key === "y") {
         e.preventDefault();
         handleRedo();
+      } else if ((e.key === "Delete" || e.key === "Backspace")) {
+        e.preventDefault();
+        if (selectedEventId) {
+          const eventToDelete = events.find(
+            (event) => event.id === selectedEventId
+          );
+          deleteEvent(eventToDelete);
+        }
       }
     };
 
@@ -69,7 +77,7 @@ function Canvas({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleUndo, handleRedo]);
+  }, [handleUndo, handleRedo, selectedEventId]);
 
   function addEvent(e) {
     e.evt.preventDefault();
@@ -114,15 +122,10 @@ function Canvas({
   }
 
   function handleEventClick(e, event) {
-    if (e.evt.button === 0) {
-      if (selectedEventId === event.id) {
-        setSidebarActive(false);
-        setSelectedEventId(null);
-      } else {
-        setSidebarActive(true);
-        setSelectedEventId(event.id);
-      }
-    }
+    setSelectedEventId(event.id);
+    setSidebarActive(true);
+    setContextMenu(null);
+    
   }
 
   function handleRelationClick(e, relation) {
@@ -167,8 +170,7 @@ function Canvas({
     setContextMenu(null);
   }
 
-  function updateRelation(relation, type) {
-    console.log(relation);  
+  function updateRelation(relation, type) {  
     saveToHistory(events, relations);
     const updatedRelations = relations.map((rel) => {
       if (rel.id === relation.id) {
