@@ -1,12 +1,33 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Simulator from "./components/Simulator";
 import GraphEditor from "./components/GraphEditor";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import FileManager from "./components/FileManager";
 
 function App() {
   const [events, setEvents] = useState([]);
   const [relations, setRelations] = useState([]);
+
+  // When the app first loads up, check if there are any events or relations saved in local storage
+  useEffect(() => {
+    const savedEvents = localStorage.getItem("events");
+    const savedRelations = localStorage.getItem("relations");
+    if (savedEvents) {
+      setEvents(JSON.parse(savedEvents));
+    }
+    if (savedRelations) {
+      setRelations(JSON.parse(savedRelations));
+    }
+  }, []);
+
+  // Every time the events or relations state changes, save it to local storage
+  useEffect(() => {
+    if (events.length > 0) {
+    localStorage.setItem("events", JSON.stringify(events));
+    localStorage.setItem("relations", JSON.stringify(relations));
+    console.log("Events and relations saved to local storage");
+    }
+  }, [events, relations]);
 
   return (
     <Router>
