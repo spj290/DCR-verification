@@ -18,19 +18,20 @@ function RightSidebar({ selectedEventId, events, updateEventLabel }) {
   function handleSubmit(e) {
     e.preventDefault();
   }
-  
 
   return (
-    <form className="right-sidebar" onSubmit={handleSubmit}>
-      <label htmlFor="inputField">Label</label>
-      <input
-        type="text"
-        value={newLabel}
-        onChange={updateLabel}
-        id="inputField"
-        className="input-field"
-      />
-    </form>
+    <div className="right-sidebar">
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="inputField">Label</label>
+        <input
+          type="text"
+          value={newLabel}
+          onChange={updateLabel}
+          id="inputField"
+          className="input-field"
+        />
+      </form>
+    </div>
   );
 }
 
