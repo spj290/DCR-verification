@@ -32,6 +32,18 @@ function Simulator({ events, relations }) {
     console.log(simulatorState);
   }
 
+  function clearSimulation() {
+    setSimulatorState({
+      currDCRGraph: convertToDCRGraph(events, relations),
+      enabledEvents:
+        events.length == 0
+          ? new Set()
+          : getEnabled(dcrToBitDCR(convertToDCRGraph(events, relations))),
+    });
+    setTrace([]);
+  }
+
+
   function convertToDCRGraph(events, relations) {
     const eventIdSet = new Set(
       events.map((event) => {
@@ -131,7 +143,8 @@ function Simulator({ events, relations }) {
             </div>
           ))}
         </div>
-        <button>Simulate</button>
+        <button onClick={eventClick}>Simulate</button>
+        <button onClick={clearSimulation}>Clear Simulation</button>
       </div>
       {/* {simulationCheck.show && (
         <div
