@@ -122,10 +122,11 @@ function Canvas({
   }
 
   function handleEventClick(e, event) {
-    setSelectedEventId(event.id);
-    setSidebarActive(true);
-    setContextMenu(null);
-    
+    if (e.evt.button === 0) { // Left click
+      setSelectedEventId(event.id);
+      setSidebarActive(true);
+      setContextMenu(null);
+    }
   }
 
   function handleRelationClick(e, relation) {
