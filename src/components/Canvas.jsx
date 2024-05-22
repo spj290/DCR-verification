@@ -159,6 +159,7 @@ function Canvas({
         fromEvent: selectedEvent,
         toEvent: event,
         type: type,
+        id: crypto.randomUUID(),
       };
       saveToHistory(events, relations);
       setRelations([...relations, relation]);
