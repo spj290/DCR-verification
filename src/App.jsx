@@ -11,9 +11,19 @@ function App() {
   return (
     <Router>
       <nav className="navbar">
-        <Link to="/">EDITOR</Link>
-        <Link to="/simulator">SIMULATOR</Link>
-        <FileManager events={events} relations={relations} setEvents={setEvents} setRelations={setRelations}/>
+        <h1 className="navbar-title">DCR Graphing Tool</h1>
+        <Link className="links" to="/">
+          EDITOR
+        </Link>
+        <Link className="links" to="/simulator">
+          SIMULATOR
+        </Link>
+        <FileManager
+          events={events}
+          relations={relations}
+          setEvents={setEvents}
+          setRelations={setRelations}
+        />
       </nav>
       <Routes>
         <Route
