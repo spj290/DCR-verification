@@ -3,6 +3,10 @@ import { RELATION_TYPES } from "../RelationTypes";
 
 function Relations({ relations, setArrowEndpoints, handleRelationClick}) {
   function setArrowEndpoints(fromEvent, toEvent, type) {
+    if (type === RELATION_TYPES.CONDITION) {
+      [fromEvent, toEvent] = [toEvent, fromEvent];
+    }
+    
     const shift =
       type === RELATION_TYPES.CONDITION
         ? 0
