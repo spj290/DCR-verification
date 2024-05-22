@@ -109,13 +109,13 @@ function Simulator({ events, relations }) {
 
   return (
     <div className="simulator">
-      <div>
+      <div className="simulator-canvas">
         {trace.map((event) => (
           <div>{event.label}</div>
         ))}
       </div>
       <div className="simulator-events">
-        <h3>Event Labels</h3>
+        <h3 className="simulator-event-label-label">Event Labels</h3>
         <div className="event-list">
           {events.map((event, index) => (
             <div

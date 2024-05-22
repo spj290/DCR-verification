@@ -17,6 +17,7 @@ function Canvas({
   const [contextMenu, setContextMenu] = useState(null);
   const [history, setHistory] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Function to save current state to history
   const saveToHistory = (currentEvents, currentRelations) => {
@@ -53,6 +54,19 @@ function Canvas({
   }, [redoStack, events, relations]);
 
   useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "z") {
         e.preventDefault();
@@ -60,7 +74,7 @@ function Canvas({
       } else if ((e.ctrlKey || e.metaKey) && e.key === "y") {
         e.preventDefault();
         handleRedo();
-      } else if ((e.key === "Delete" || e.key === "Backspace")) {
+      } else if (e.key === "Delete" || e.key === "Backspace") {
         e.preventDefault();
         if (selectedEventId) {
           const eventToDelete = events.find(
@@ -122,7 +136,8 @@ function Canvas({
   }
 
   function handleEventClick(e, event) {
-    if (e.evt.button === 0) { // Left click
+    if (e.evt.button === 0) {
+      // Left click
       setSelectedEventId(event.id);
       setSidebarActive(true);
       setContextMenu(null);
@@ -171,7 +186,7 @@ function Canvas({
     setContextMenu(null);
   }
 
-  function updateRelation(relation, type) {  
+  function updateRelation(relation, type) {
     saveToHistory(events, relations);
     const updatedRelations = relations.map((rel) => {
       if (rel.id === relation.id) {
@@ -239,13 +254,13 @@ function Canvas({
       setSelectedEventId(null);
       setContextMenu(null);
     }
-  }
+  };
 
   return (
     <>
       <Stage
         className="canvas"
-        width={window.innerWidth * (sidebarActive ? 0.87 : 1) - 35}
+        width={windowWidth - (sidebarActive ? 220 : 35)}
         height={window.innerHeight - 90}
         draggable
         onClick={handleStageClick()}
