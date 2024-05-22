@@ -6,6 +6,7 @@ import ContextMenu from "./ContextMenu";
 
 function Canvas({
   sidebarActive,
+  testsActive,
   setSidebarActive,
   events,
   setEvents,
@@ -260,7 +261,7 @@ function Canvas({
     <>
       <Stage
         className="canvas"
-        width={windowWidth - (sidebarActive ? 220 : 35)}
+        width={windowWidth - (sidebarActive || testsActive ? 220 : 35)}
         height={window.innerHeight - 90}
         draggable
         onClick={handleStageClick()}
