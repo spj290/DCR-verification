@@ -167,6 +167,7 @@ function Canvas({
   }
 
   function updateRelation(relation, type) {
+    console.log(relation);  
     saveToHistory(events, relations);
     const updatedRelations = relations.map((rel) => {
       if (rel.id === relation.id) {
@@ -230,6 +231,14 @@ function Canvas({
     saveToHistory(events, relations); // Save current state to history only on drag end
   }
 
+  const handleStageClick = () => (e) => {
+    if (e.target === e.target.getStage()) {
+      setSidebarActive(false);
+      setSelectedEventId(null);
+      setContextMenu(null);
+    }
+  }
+
   return (
     <>
       <Stage
@@ -237,6 +246,7 @@ function Canvas({
         width={window.innerWidth * (sidebarActive ? 0.9 : 1)}
         height={window.innerHeight - 40}
         draggable
+        onClick={handleStageClick()}
         onContextMenu={addEvent}
       >
         <Layer>
