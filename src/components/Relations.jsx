@@ -1,7 +1,7 @@
 import { Arrow } from "react-konva";
 import { RELATION_TYPES } from "../RelationTypes";
 
-function Relations({ relations, setArrowEndpoints }) {
+function Relations({ relations, setArrowEndpoints, handleRelationClick}) {
   function setArrowEndpoints(fromEvent, toEvent, type) {
     if (type === RELATION_TYPES.CONDITION) {
       [fromEvent, toEvent] = [toEvent, fromEvent];
@@ -108,6 +108,8 @@ function Relations({ relations, setArrowEndpoints }) {
             )}
             stroke={color}
             fill={color}
+            // onClick={(e) => handleRelationClick(e, relation)}
+            onContextMenu={(e) => handleRelationClick(e, relation)}
           />
         );
       })}
