@@ -30,11 +30,11 @@ export function convertToDCRGraph(events, relations) {
     };
 
     relations.map((relation) => {
-    //   if (relation.type == RELATION_TYPES.CONDITION) 
-    //     relationsMap[relation.type][relation.toEvent.label].add(
-    //       relation.fromEvent.label
-    // );
-    //   else
+      if (relation.type == RELATION_TYPES.CONDITION) 
+        relationsMap[relation.type][relation.toEvent.label].add(
+          relation.fromEvent.label
+    );
+      else
       relationsMap[relation.type][relation.fromEvent.label].add(
         relation.toEvent.label
       );
