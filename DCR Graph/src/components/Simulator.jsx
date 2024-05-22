@@ -82,7 +82,9 @@ function Simulator({ events, relations }) {
     <div className="app">
       <div className="simulation-trace">
         {trace.map((event) => (
-          <div className="simulator-event">{event.label}</div>
+          <div className="simulator-event">
+            {event.label}
+          </div>
         ))}
       </div>
       <div className="simulator-events">

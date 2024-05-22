@@ -3,6 +3,7 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", sans-serif;
   background-color: #f7fbfc;
+  overflow: hidden;
 }
 
 .app {
@@ -11,7 +12,7 @@ body {
   grid-template-areas: "main right";
 }
 .canvas {
-  background-color: black;
+  background-color: white;
   border-radius: 5px;
   stroke: 2px solid black;
   margin-left: 5px;
@@ -41,6 +42,8 @@ body {
   padding: 10px;
   border-radius: 10px;
   margin: 10px;
+  position: relative;
+  height: 200px;
 }
 
 .input-field {
@@ -74,6 +77,7 @@ body {
   height: 60px; /* Adjust the height to properly contain your elements */
   border-radius: 10px;
   margin: 5px;
+  position: relative;
 }
 
 .navbar-title {
@@ -118,16 +122,19 @@ body {
 
 .simulator-events {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr auto; /* Adjust to ensure proper layout */
   background-color: #f4f4f4;
   border: 1px solid #ccc;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   padding: 5px;
-  height: calc(100vh - 52px);
+  height: 400px; /* Set a fixed height as needed */
+  overflow: hidden; /* Hide overflow on the main container */
 }
 
 .event-list {
-  overflow-y: auto;
+  overflow-y: auto; /* Ensure the list scrolls vertically */
+  overflow-x: hidden; /* Hide horizontal overflow if not needed */
+  max-height: calc(100% - 50px); /* Adjust based on your layout */
 }
 
 .event-list div {
