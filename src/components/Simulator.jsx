@@ -17,7 +17,7 @@ function Simulator({ events, relations }) {
         ? new Set()
         : getEnabled(dcrToBitDCR(convertToDCRGraph(events, relations))),
   });
-  
+
   function eventClick(event) {
     const graph = bitGraphToGraphPP(
       bitDCRtoLabelDCR(dcrToBitDCR(simulatorState.currDCRGraph))
@@ -25,7 +25,8 @@ function Simulator({ events, relations }) {
     execute(event.id, graph);
 
     // setSimulatorState({currDCRGraph:graph["BitDCRGraph"]})
-    setSimulatorState({enabledEvents:getEnabled(graph)} // BitLabelDCRPP -> BitDCRGraph
+    setSimulatorState(
+      { enabledEvents: getEnabled(graph) } // BitLabelDCRPP -> BitDCRGraph
     );
     setTrace([...trace, { label: event.label, id: event.id }]);
     console.log(simulatorState);
@@ -107,7 +108,7 @@ function Simulator({ events, relations }) {
   // }
 
   return (
-    <div className="app">
+    <div className="simulator">
       <div>
         {trace.map((event) => (
           <div>{event.label}</div>

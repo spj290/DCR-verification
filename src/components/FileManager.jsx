@@ -1,16 +1,11 @@
 import Events from "./Events";
 import Relations from "./Relations";
-import React, { useRef,useState } from 'react';
+import React, { useRef, useState } from "react";
+import "../styles/filemanager.css";
 
-function FileManager({
-  events,
-  relations,
-  setEvents,
-  setRelations,
-}){
-
+function FileManager({ events, relations, setEvents, setRelations }) {
   const fileInputRef = useRef(null);
-  const [fileName, setFileName] = useState('dcr.json');
+  const [fileName, setFileName] = useState("dcr.json");
 
   // const saveState = () => {
   //   const state = {
@@ -31,15 +26,15 @@ function FileManager({
     };
     const fileContent = JSON.stringify(state);
 
-    if ('showSaveFilePicker' in window) {
+    if ("showSaveFilePicker" in window) {
       // If the File System Access API is supported
       try {
         const handle = await window.showSaveFilePicker({
           suggestedName: fileName,
           types: [
             {
-              description: 'JSON Files',
-              accept: { 'application/json': ['.json'] },
+              description: "JSON Files",
+              accept: { "application/json": [".json"] },
             },
           ],
         });
@@ -47,22 +42,21 @@ function FileManager({
         await writable.write(fileContent);
         await writable.close();
       } catch (err) {
-        console.error('Save operation failed:', err);
+        console.error("Save operation failed:", err);
       }
     } else {
       // Fallback for browsers that do not support the File System Access API
-      const a = document.createElement('a');
-      const file = new Blob([fileContent], { type: 'application/json' });
+      const a = document.createElement("a");
+      const file = new Blob([fileContent], { type: "application/json" });
       a.href = URL.createObjectURL(file);
       a.download = fileName;
       a.click();
     }
   };
 
-
   const askForFilePath = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const loadState = (e) => {
     const file = e.target.files[0];
@@ -73,24 +67,28 @@ function FileManager({
       setRelations(state.relations);
     };
     reader.readAsText(file);
-  }
+  };
 
   const handleFileNameChange = (e) => {
     setFileName(e.target.value);
   };
 
   return (
-    <div>
-      <button onClick={saveState}>Save</button>
-      <button onClick={askForFilePath}>Load</button>
+    <div className="file-manager">
+      <button className="save-load-button" onClick={saveState}>
+        Save
+      </button>
+      <button className="save-load-button" onClick={askForFilePath}>
+        Load
+      </button>
       <input
         type="file"
         ref={fileInputRef}
         style={{ display: "none" }}
         onChange={loadState}
       />
-      <Events events={events}/>
-      <Relations relations={relations}/>
+      <Events events={events} />
+      <Relations relations={relations} />
     </div>
   );
 }

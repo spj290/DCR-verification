@@ -1,6 +1,7 @@
 import Canvas from "./Canvas";
 import RightSidebar from "./RightSidebar";
 import { useState } from "react";
+import "../styles/grapheditor.css";
 
 function GraphEditor({ events, setEvents, relations, setRelations }) {
   const [sidebarActive, setSidebarActive] = useState(false);
@@ -18,23 +19,27 @@ function GraphEditor({ events, setEvents, relations, setRelations }) {
 
   return (
     <div className="app">
-      <Canvas
-        sidebarActive={sidebarActive}
-        setSidebarActive={setSidebarActive}
-        events={events}
-        setEvents={setEvents}
-        selectedEventId={selectedEventId}
-        setSelectedEventId={setSelectedEventId}
-        relations={relations}
-        setRelations={setRelations}
-      />
-      {sidebarActive && (
-        <RightSidebar
-          selectedEventId={selectedEventId}
+      <div className="canvas-container">
+        <Canvas
+          sidebarActive={sidebarActive}
+          setSidebarActive={setSidebarActive}
           events={events}
-          updateEventLabel={updateEventLabel}
+          setEvents={setEvents}
+          selectedEventId={selectedEventId}
+          setSelectedEventId={setSelectedEventId}
+          relations={relations}
+          setRelations={setRelations}
         />
-      )}
+      </div>
+      <div className={`sidebar ${sidebarActive ? "active" : ""}`}>
+        {sidebarActive && (
+          <RightSidebar
+            selectedEventId={selectedEventId}
+            events={events}
+            updateEventLabel={updateEventLabel}
+          />
+        )}
+      </div>
     </div>
   );
 }
