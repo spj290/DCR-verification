@@ -3,10 +3,6 @@ import { RELATION_TYPES } from "../RelationTypes";
 
 function Relations({ relations, setArrowEndpoints, handleRelationClick}) {
   function setArrowEndpoints(fromEvent, toEvent, type) {
-    if (type === RELATION_TYPES.CONDITION) {
-      [fromEvent, toEvent] = [toEvent, fromEvent];
-    }
-    
     const shift =
       type === RELATION_TYPES.CONDITION
         ? 0
@@ -21,26 +17,14 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick}) {
     const eventWidth = 80;
     const eventHeight = 100;
 
+
+
+
     const fromX = fromEvent.position.x + eventWidth / 2;
     const fromY = fromEvent.position.y + eventHeight / 2;
 
     const toX = toEvent.position.x + eventWidth / 2;
     const toY = toEvent.position.y + eventHeight / 2;
-
-    if (fromEvent.id === toEvent.id) {
-      const selfshift = shift + 10
-      const ringRadius = 30; // Radius of the ring
-
-      const topLeftX = fromX - eventWidth / 2;
-      const topLeftY = fromY - eventHeight / 2;
-
-      return [
-        topLeftX + selfshift, topLeftY, // Starting point (top-left corner of the event)
-        topLeftX + selfshift, topLeftY - ringRadius, // Goes up
-        topLeftX + ringRadius + selfshift, topLeftY - ringRadius, // Goes right
-        topLeftX + ringRadius + selfshift, topLeftY, // Ending point (goes down)
-      ];
-    }
 
     const angle = Math.atan2(toY - fromY, toX - fromX);
 

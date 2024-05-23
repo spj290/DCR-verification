@@ -60,14 +60,6 @@ function Canvas({
       } else if ((e.ctrlKey || e.metaKey) && e.key === "y") {
         e.preventDefault();
         handleRedo();
-      } else if ((e.key === "Delete" || e.key === "Backspace")) {
-        e.preventDefault();
-        if (selectedEventId) {
-          const eventToDelete = events.find(
-            (event) => event.id === selectedEventId
-          );
-          deleteEvent(eventToDelete);
-        }
       }
     };
 
@@ -77,7 +69,7 @@ function Canvas({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleUndo, handleRedo, selectedEventId]);
+  }, [handleUndo, handleRedo]);
 
   function addEvent(e) {
     e.evt.preventDefault();
@@ -122,10 +114,14 @@ function Canvas({
   }
 
   function handleEventClick(e, event) {
-    if (e.evt.button === 0) { // Left click
-      setSelectedEventId(event.id);
-      setSidebarActive(true);
-      setContextMenu(null);
+    if (e.evt.button === 0) {
+      if (selectedEventId === event.id) {
+        setSidebarActive(false);
+        setSelectedEventId(null);
+      } else {
+        setSidebarActive(true);
+        setSelectedEventId(event.id);
+      }
     }
   }
 
@@ -163,7 +159,6 @@ function Canvas({
         fromEvent: selectedEvent,
         toEvent: event,
         type: type,
-        id: crypto.randomUUID(),
       };
       saveToHistory(events, relations);
       setRelations([...relations, relation]);
@@ -171,7 +166,8 @@ function Canvas({
     setContextMenu(null);
   }
 
-  function updateRelation(relation, type) {  
+  function updateRelation(relation, type) {
+    console.log(relation);  
     saveToHistory(events, relations);
     const updatedRelations = relations.map((rel) => {
       if (rel.id === relation.id) {
