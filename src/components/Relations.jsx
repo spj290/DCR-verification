@@ -24,7 +24,7 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
     const toY = toEvent.position.y + eventHeight / 2;
 
     if (fromEvent.id === toEvent.id) {
-      const selfshift = shift + 10
+      const selfshift = shift + 25
       const ringRadius = 30; // Radius of the ring
 
       const topLeftX = fromX - eventWidth / 2;
