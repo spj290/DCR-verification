@@ -11,7 +11,7 @@ function Events({
 }) {
 
   function handleIsPending(event) {
-    if (event.pending) {
+    if (event.marking.pending) {
       return "!"
     } else {
       return ""
@@ -38,7 +38,7 @@ function Events({
             fill="beige"
             stroke={selectedEventId === event.id ? "dodgerBlue" : "grey"}
             strokeWidth={selectedEventId === event.id ? 4 : 2}
-            dash={event.included === false ? [5,5] : [1,0]}
+            dash={event.marking.included === false ? [5,5] : [1,0]}
           />
           <Text
             text={event.label}
@@ -57,7 +57,7 @@ function Events({
             fill={"blue"}
             />
           <Text
-          text={event.executed === true ? "✓" : ""}
+          text={event.marking.executed === true ? "✓" : ""}
             fontSize={20}
             fontStyle={"bold"}
             offsetX={-55}
