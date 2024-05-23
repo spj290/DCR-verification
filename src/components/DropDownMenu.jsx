@@ -19,16 +19,18 @@ function DropDownMenu({
     <div className={`dropdown ${className}`} onMouseLeave={onMouseLeave}>
       <ul className="dropdown-content">
         <li>
-          <button onClick={reset}>Reset</button>
+          <button className="default-button-style" onClick={reset}>
+            Reset
+          </button>
         </li>
         <li>
-          <button>Delete</button>
+          <button className="default-button-style">Delete</button>
         </li>
         <li>
-          <button>Undo</button>
+          <button className="default-button-style">Undo</button>
         </li>
         <li>
-          <button>Redo</button>
+          <button className="default-button-style">Redo</button>
         </li>
       </ul>
     </div>

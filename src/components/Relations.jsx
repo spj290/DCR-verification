@@ -24,17 +24,21 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
     const toY = toEvent.position.y + eventHeight / 2;
 
     if (fromEvent.id === toEvent.id) {
-      const selfshift = shift + 25
+      const selfshift = shift + 25;
       const ringRadius = 30; // Radius of the ring
 
       const topLeftX = fromX - eventWidth / 2;
       const topLeftY = fromY - eventHeight / 2;
 
       return [
-        topLeftX + selfshift, topLeftY, // Starting point (top-left corner of the event)
-        topLeftX + selfshift, topLeftY - ringRadius, // Goes up
-        topLeftX + ringRadius + selfshift, topLeftY - ringRadius, // Goes right
-        topLeftX + ringRadius + selfshift, topLeftY, // Ending point (goes down)
+        topLeftX + selfshift,
+        topLeftY, // Starting point (top-left corner of the event)
+        topLeftX + selfshift,
+        topLeftY - ringRadius, // Goes up
+        topLeftX + ringRadius + selfshift,
+        topLeftY - ringRadius, // Goes right
+        topLeftX + ringRadius + selfshift,
+        topLeftY, // Ending point (goes down)
       ];
     }
 
@@ -45,50 +49,42 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
     // let toArrowX = toX - (Math.cos(angle) * eventWidth) / 2;
     // let toArrowY = toY - (Math.sin(angle) * eventHeight) / 2;
 
-    let fromArrowX = fromX;
+    let fromArrowX = fromX; //+ Math.sin(angle) / (eventHeight / 2);
     let fromArrowY = fromY;
     let toArrowX = toX;
     let toArrowY = toY;
+    console.log(angle);
 
     if (angle <= 0.25 * Math.PI && angle >= -0.25 * Math.PI) {
       // Right Side
-      fromArrowY = fromY + shift;
+      console.log("Right Side");
+      fromArrowY = (Math.tan(angle) * eventWidth) / 2 + fromY + shift;
       fromArrowX = fromX + eventWidth / 2;
       toArrowX = toX - eventWidth / 2;
-      toArrowY = toY + shift;
+      toArrowY = (Math.tan(angle) * -eventWidth) / 2 + toY + shift;
     } else if (angle >= 0.25 * Math.PI && angle <= 0.75 * Math.PI) {
       // Bottom Side
-      fromArrowX = fromX + shift;
+      fromArrowX = (Math.cos(angle) * eventHeight) / 2 + fromX - shift;
       fromArrowY = fromY + eventHeight / 2;
       toArrowY = toY - eventHeight / 2;
-      toArrowX = toX + shift;
+      toArrowX = (Math.cos(angle) * -eventHeight) / 2 + toX - shift;
     } else if (angle <= -0.25 * Math.PI && angle >= -0.75 * Math.PI) {
       // Top Side
-      fromArrowX = fromX + shift;
+      fromArrowX = (Math.cos(angle) * eventHeight) / 2 + fromX + shift;
       fromArrowY = fromY - eventHeight / 2;
-      toArrowX = toX + shift;
+      toArrowX = (Math.cos(angle) * -eventHeight) / 2 + toX + shift;
       toArrowY = toY + eventHeight / 2;
     } else if (angle >= 0.75 * Math.PI || angle <= -0.75 * Math.PI) {
       // Left Side
       fromArrowX = fromX - eventWidth / 2;
-      fromArrowY = fromY + shift;
+      fromArrowY = (Math.tan(angle) * -eventWidth) / 2 + fromY + shift;
       toArrowX = toX + eventWidth / 2;
-      toArrowY = toY + shift;
+      toArrowY = (Math.tan(angle) * eventWidth) / 2 + toY + shift;
     } else {
       console.warn("Invalid Angle Value in setArrowEndpoints() function.");
     }
 
     return [fromArrowX, fromArrowY, toArrowX, toArrowY];
-
-    // if (Math.abs(fromArrowX - toArrowX) < Math.abs(fromArrowY - toArrowY))
-    //   return [fromArrowX + shift, fromArrowY, toArrowX + shift, toArrowY];
-
-    // const fromArrowX = fromX + (Math.cos(angle) * eventWidth) / 2;
-    // const fromArrowY = fromY + (Math.sin(angle) * eventHeight) / 2;
-    // const toArrowX = toX - (Math.cos(angle) * eventWidth) / 2;
-    // const toArrowY = toY - (Math.sin(angle) * eventHeight) / 2;
-    // if (Math.abs(fromArrowX - toArrowX) < Math.abs(fromArrowY - toArrowY))
-    //   return [fromArrowX + shift, fromArrowY, toArrowX + shift, toArrowY];
   }
 
   return (
@@ -113,6 +109,7 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
               relation.toEvent,
               relation.type
             )}
+            tension={0.6}
             stroke={color}
             fill={color}
             // onClick={(e) => handleRelationClick(e, relation)}

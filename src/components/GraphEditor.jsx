@@ -11,6 +11,7 @@ function GraphEditor({
   setRelations,
   testsActive,
   tests,
+  setTestsActive,
 }) {
   const [sidebarActive, setSidebarActive] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
@@ -38,6 +39,7 @@ function GraphEditor({
           setSelectedEventId={setSelectedEventId}
           relations={relations}
           setRelations={setRelations}
+          setTestsActive={setTestsActive}
         />
       </div>
       <div>

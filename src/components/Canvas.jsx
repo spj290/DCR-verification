@@ -107,17 +107,10 @@ function Canvas({
       y: pointerPosition.y - canvasPosition.y,
     };
 
-    const marking = {
-      pending: false,
-      executed: false,
-      included: true
-    };
-
     const event = {
       position: position,
       id: crypto.randomUUID(),
       label: `Event${events.length + 1}`,
-      marking: marking
     };
     saveToHistory(events, relations);
     setEvents([...events, event]);
@@ -269,7 +262,7 @@ function Canvas({
     <>
       <Stage
         className="canvas"
-        width={windowWidth - (sidebarActive || testsActive ? 220 : 35)}
+        width={windowWidth - (sidebarActive || testsActive ? 240 : 45)}
         height={window.innerHeight - 90}
         draggable
         onClick={handleStageClick()}

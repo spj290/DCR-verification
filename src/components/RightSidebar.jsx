@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import "../styles/rightSidebar.css";
 
-function RightSidebar({ selectedEventId, events, updateEventLabel, setEvents }) {
+function RightSidebar({ selectedEventId, events, updateEventLabel }) {
   const [newLabel, setNewLabel] = useState("");
-  // const [pending, setPending] = useState(false);
 
   useEffect(() => {
     if (selectedEventId) {
@@ -17,27 +16,8 @@ function RightSidebar({ selectedEventId, events, updateEventLabel, setEvents }) 
     updateEventLabel(selectedEventId, updatedLabel);
   }
 
-
   function handleSubmit(e) {
     e.preventDefault();
-  }
-
-  function handlePending() {
-    setEvents(events.map((event) => event.id === selectedEventId ? {...event, marking: {pending: !event.marking.pending, included: event.marking.included, executed: event.marking.executed}} : event.marking))
-  }
-
-  function handleIncluded() {
-    setEvents(events.map((event) => event.id === selectedEventId ? {...event, marking: {included: !event.marking.included, pending: event.marking.pending, executed: event.marking.executed}} : event))
-  }
-
-  function handleExecuted() {
-    setEvents(events.map((event) => event.id === selectedEventId ? {...event, marking: {included: event.marking.included, pending: event.marking.pending, executed: !event.marking.executed}} : event))
-  }
-
-  function toggleEventProperty(property) {
-    setEvents(events.map(event =>
-      event.id === selectedEventId ? { ...event, [property]: !event[property] } : event
-    ));
   }
 
   return (
@@ -52,21 +32,6 @@ function RightSidebar({ selectedEventId, events, updateEventLabel, setEvents }) 
           className="input-field"
         />
       </form>
-      <ul className="event-properties">
-        <li><input type="checkbox"
-                   checked={events.find((event) => event.id === selectedEventId ? event.marking.pending : false)}
-                   onChange={handlePending}
-                   />Pending</li>
-        <li><input type="checkbox"
-                  checked={events.find((event) => event.id === selectedEventId ? event.marking.included : false)}
-                  onChange={handleIncluded}
-                  />Included</li>
-        <li><input type="checkbox"
-                  checked={events.find((event) => event.id === selectedEventId ? event.marking.executed : false)}
-                  onChange={handleExecuted}
-                  />Executed</li>
-      </ul>
-      
     </div>
   );
 }

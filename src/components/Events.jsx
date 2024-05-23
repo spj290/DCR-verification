@@ -9,15 +9,6 @@ function Events({
   handleDragEnd,
   handleDragStart,
 }) {
-
-  function handleIsPending(event) {
-    if (event.marking.pending) {
-      return "!"
-    } else {
-      return ""
-    }
-  }
-
   return (
     <>
       {events.map((event) => (
@@ -35,10 +26,14 @@ function Events({
           <Rect
             width={80}
             height={100}
-            fill="beige"
-            stroke={selectedEventId === event.id ? "dodgerBlue" : "grey"}
-            strokeWidth={selectedEventId === event.id ? 4 : 2}
-            dash={event.marking.included === false ? [5,5] : [1,0]}
+            fill="#f9f9f9"
+            stroke={selectedEventId === event.id ? "lightblue" : "white"}
+            strokeWidth={selectedEventId === event.id ? 3 : 0}
+            cornerRadius={15}
+            shadowBlur={2}
+            shadowOffsetX={2}
+            shadowOffsetY={2}
+            shadowOpacity={0.2}
           />
           <Text
             text={event.label}
@@ -47,26 +42,9 @@ function Events({
             align="center"
             verticalAlign="middle"
             wrap="word"
+            fontSize={16}
+            fontFamily="sans-serif"
           />
-          <Text
-          text={handleIsPending(event)}
-            fontSize={20}
-            fontStyle={"bold"}
-            offsetX={-5}
-            offsetY={-5}
-            fill={"blue"}
-            />
-          <Text
-          text={event.marking.executed === true ? "✓" : ""}
-            fontSize={20}
-            fontStyle={"bold"}
-            offsetX={-55}
-            offsetY={-5}
-            fill={"green"}
-            />
-
-
-          
         </Group>
       ))}
     </>
