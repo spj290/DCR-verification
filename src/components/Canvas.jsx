@@ -111,6 +111,9 @@ function Canvas({
       position: position,
       id: crypto.randomUUID(),
       label: `Event${events.length + 1}`,
+      pending: false,
+      executed: false,
+      included: true
     };
     saveToHistory(events, relations);
     setEvents([...events, event]);
