@@ -3,7 +3,14 @@ import RightSidebar from "./RightSidebar";
 import { useState } from "react";
 import "../styles/grapheditor.css";
 
-function GraphEditor({ events, setEvents, relations, setRelations }) {
+function GraphEditor({
+  events,
+  setEvents,
+  relations,
+  setRelations,
+  testsActive,
+  tests,
+}) {
   const [sidebarActive, setSidebarActive] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
 
@@ -22,6 +29,7 @@ function GraphEditor({ events, setEvents, relations, setRelations }) {
       <div className="canvas-container">
         <Canvas
           sidebarActive={sidebarActive}
+          testsActive={testsActive}
           setSidebarActive={setSidebarActive}
           events={events}
           setEvents={setEvents}
@@ -31,13 +39,26 @@ function GraphEditor({ events, setEvents, relations, setRelations }) {
           setRelations={setRelations}
         />
       </div>
-      <div className={`sidebar ${sidebarActive ? "active" : ""}`}>
-        {sidebarActive && (
-          <RightSidebar
-            selectedEventId={selectedEventId}
-            events={events}
-            updateEventLabel={updateEventLabel}
-          />
+      <div>
+        {testsActive ? (
+          <div className="right-sidebar">
+            <h3>Tests</h3>
+            <div className="event-list">
+              {tests.map((test) => (
+                <div className={test.status ? "enabled" : "disabled"}>
+                  {test.name}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          sidebarActive && (
+            <RightSidebar
+              selectedEventId={selectedEventId}
+              events={events}
+              updateEventLabel={updateEventLabel}
+            />
+          )
         )}
       </div>
     </div>

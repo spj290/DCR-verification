@@ -170,7 +170,7 @@ body {
 .event-list {
   overflow-y: auto; /* Ensure the list scrolls vertically */
   overflow-x: hidden; /* Hide horizontal overflow if not needed */
-  max-height: calc(100% - 50px); /* Adjust based on your layout */
+  max-height: calc(100% - 20px); /* Adjust based on your layout */
 }
 
 .event-list div {
@@ -199,10 +199,21 @@ body {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.success {
+.enabled {
   background-color: green;
 }
+.enabled:hover {
+  background-color: rgb(10, 100, 10);
+}
 
-.failure {
+.disabled {
   background-color: red;
+}
+
+.disabled:hover {
+  background-color: rgb(200, 10, 10);
+}
+
+.neutral:hover {
+  background-color: lightgrey;
 }

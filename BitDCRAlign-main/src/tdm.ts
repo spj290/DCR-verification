@@ -23,7 +23,8 @@ const getCostFun = (context: Set<Event>, labelMap: { [e: Event]: Label }): CostF
 
 //const model: DCRGraph;
 //const bitModelPP: BitLabelDCRPP = bitGraphToGraphPP(bitDCRtoLabelDCR(dcrToBitDCR(model)));
-export default (test: Test, model: BitLabelDCRPP, maxDepth: number): boolean => {
+export default (test: Test, graph: DCRGraph, maxDepth: number): boolean => {
+    const model: BitLabelDCRPP = bitGraphToGraphPP(bitDCRtoLabelDCR(dcrToBitDCR(graph)));
     const costFun = getCostFun(test.context, model.labelMap);
     const alignment = bitAlignWithCheck(test.trace, model, test.context, maxDepth, costFun, true)
     const cost = alignment.cost;
