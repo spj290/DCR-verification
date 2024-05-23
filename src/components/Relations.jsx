@@ -23,6 +23,21 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
     const toX = toEvent.position.x + eventWidth / 2;
     const toY = toEvent.position.y + eventHeight / 2;
 
+    if (fromEvent.id === toEvent.id) {
+      const selfshift = shift + 25
+      const ringRadius = 30; // Radius of the ring
+
+      const topLeftX = fromX - eventWidth / 2;
+      const topLeftY = fromY - eventHeight / 2;
+
+      return [
+        topLeftX + selfshift, topLeftY, // Starting point (top-left corner of the event)
+        topLeftX + selfshift, topLeftY - ringRadius, // Goes up
+        topLeftX + ringRadius + selfshift, topLeftY - ringRadius, // Goes right
+        topLeftX + ringRadius + selfshift, topLeftY, // Ending point (goes down)
+      ];
+    }
+
     const angle = Math.atan2(toY - fromY, toX - fromX);
 
     // let fromArrowX = fromX + (Math.cos(angle) * eventWidth) / 2;
