@@ -6,10 +6,8 @@ function DropDownMenu({
   setEvents,
   relations,
   setRelations,
-  tests,
-  setTests,
-  testsActive,
-  setTestsActive,
+  className,
+  onMouseLeave,
 }) {
   function reset() {
     console.log("Resetting events and relations");
@@ -18,19 +16,19 @@ function DropDownMenu({
   }
 
   return (
-    <div className="dropdown">
+    <div className={`dropdown ${className}`} onMouseLeave={onMouseLeave}>
       <ul className="dropdown-content">
         <li>
           <button onClick={reset}>Reset</button>
         </li>
         <li>
-          <a href="#">Delete</a>
+          <button>Delete</button>
         </li>
         <li>
-          <a href="#">Undo</a>
+          <button>Undo</button>
         </li>
         <li>
-          <a href="#">Redo</a>
+          <button>Redo</button>
         </li>
       </ul>
     </div>

@@ -1,0 +1,24 @@
+.context-menu {
+  position: absolute;
+  padding: 5px 5px 0 5px;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: 100px;
+}
+
+.context-menu div {
+  background-color: #f9f9f9;
+  border: none;
+  padding: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  margin-bottom: 5px;
+}
+
+.context-menu div:hover {
+  background-color: #1e293b;
+  color: #fff;
+}
