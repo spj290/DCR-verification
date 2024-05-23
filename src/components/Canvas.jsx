@@ -67,6 +67,7 @@ function Canvas({
     };
   }, []);
 
+  // Delete event, undo, redo, and keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "z") {

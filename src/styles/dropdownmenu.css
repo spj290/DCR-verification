@@ -1,0 +1,21 @@
+.dropdown {
+  position: absolute;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 100;
+  top: 70px;
+  right: 40rem;
+}
+
+.dropdown-content {
+  list-style: none;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.dropdown::before {
+  position: absolute;
+}

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import FileManager from "./components/FileManager";
 import { convertToDCRGraph } from "./utils";
 import checkAlignment from "../BitDCRAlign-main/src/tdm";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -52,32 +53,16 @@ function App() {
 
   return (
     <Router>
-      <nav className="navbar">
-        <h1 className="navbar-title">DCR Graphing Tool</h1>
-        <Link className="links" to="/">
-          EDITOR
-        </Link>
-        <Link className="links" to="/simulator">
-          SIMULATOR
-        </Link>
-        <div
-          className="links"
-          style={{
-            border: `2px solid ${
-              tests.every((test) => test.status) ? "green" : "red"
-            }`,
-          }}
-          onClick={() => setTestsActive(!testsActive)}
-        >
-          TESTS
-        </div>
-        <FileManager
-          events={events}
-          relations={relations}
-          setEvents={setEvents}
-          setRelations={setRelations}
-        />
-      </nav>
+      <Navbar
+        events={events}
+        relations={relations}
+        setEvents={setEvents}
+        setRelations={setRelations}
+        tests={tests}
+        setTests={setTests}
+        testsActive={testsActive}
+        setTestsActive={setTestsActive}
+      />
       <Routes>
         <Route
           path="/"
