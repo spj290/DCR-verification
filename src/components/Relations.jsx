@@ -17,9 +17,6 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
     const eventWidth = 80;
     const eventHeight = 100;
 
-
-
-
     const fromX = fromEvent.position.x + eventWidth / 2;
     const fromY = fromEvent.position.y + eventHeight / 2;
 
