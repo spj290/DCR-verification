@@ -8,6 +8,7 @@ import {
 } from "../../BitDCRAlign-main/src/utility";
 import { convertToDCRGraph } from "../utils";
 import TestsSidebar from "./TestsSidebar";
+import SimulatorSidebar from "./SimulatorSidebar";
 
 function Simulator({ events, relations, tests, setTests, testsActive }) {
   const [trace, setTrace] = useState([]);
@@ -86,33 +87,14 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
         {testsActive ? (
           <TestsSidebar tests={tests} />
         ) : (
-          <div className="simulator-events">
-            <h3 className="simulator-event-label-label">Event Labels</h3>
-            <div className="event-list">
-              {events.map((event, index) => (
-                <div
-                  key={index}
-                  onClick={() => eventClick(event)}
-                  className={
-                    !simulationValid
-                      ? "neutral"
-                      : simulatorState.enabledEvents.has(event.label)
-                      ? "enabled"
-                      : "disabled"
-                  }
-                >
-                  {event.label}
-                </div>
-              ))}
-            </div>
-            <button>ADD EVENT</button>
-            <button style={{ marginTop: "5px" }} onClick={addTest}>
-              SAVE AS TEST
-            </button>
-            <button style={{ marginTop: "5px" }} onClick={clearSimulation}>
-              RESET
-            </button>
-          </div>
+          <SimulatorSidebar
+            events={events}
+            simulatorState={simulatorState}
+            simulationValid={simulationValid}
+            eventClick={eventClick}
+            clearSimulation={clearSimulation}
+            addTest={addTest}
+          />
         )}
       </div>
     </div>
