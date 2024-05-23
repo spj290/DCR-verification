@@ -54,15 +54,15 @@ function RightSidebar({ selectedEventId, events, updateEventLabel, setEvents }) 
       </form>
       <ul className="event-properties">
         <li><input type="checkbox"
-                   checked={events.find((event) => event.id === selectedEventId) ? events.find((event) => event.id === selectedEventId).pending : false }
+                   checked={events.find((event) => event.id === selectedEventId ? event.pending : false)}
                    onChange={handlePending}
                    />Pending</li>
         <li><input type="checkbox"
-                  checked={events.find((event) => event.id === selectedEventId) ? events.find((event) => event.id === selectedEventId).included : false}
+                  checked={events.find((event) => event.id === selectedEventId ? event.included : false)}
                   onChange={handleIncluded}
                   />Included</li>
         <li><input type="checkbox"
-                  checked={events.find((event) => event.id === selectedEventId) ? events.find((event) => event.id === selectedEventId).executed : false}
+                  checked={events.find((event) => event.id === selectedEventId ? event.executed : false)}
                   onChange={handleExecuted}
                   />Executed</li>
       </ul>
