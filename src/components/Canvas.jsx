@@ -75,6 +75,7 @@ function Canvas({
       } else if ((e.ctrlKey || e.metaKey) && e.key === "y") {
         e.preventDefault();
         handleRedo();
+<<<<<<< HEAD
       } else if (e.key === "Delete" || e.key === "Backspace") {
         e.preventDefault();
         if (selectedEventId) {
@@ -83,6 +84,8 @@ function Canvas({
           );
           deleteEvent(eventToDelete);
         }
+=======
+>>>>>>> 5085a3877aabb71582c053a24e476eedd3bdc178
       }
     };
 
@@ -92,7 +95,7 @@ function Canvas({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleUndo, handleRedo, selectedEventId]);
+  }, [handleUndo, handleRedo]);
 
   function addEvent(e) {
     e.evt.preventDefault();
@@ -138,10 +141,20 @@ function Canvas({
 
   function handleEventClick(e, event) {
     if (e.evt.button === 0) {
+<<<<<<< HEAD
       // Left click
       setSelectedEventId(event.id);
       setSidebarActive(true);
       setContextMenu(null);
+=======
+      if (selectedEventId === event.id) {
+        setSidebarActive(false);
+        setSelectedEventId(null);
+      } else {
+        setSidebarActive(true);
+        setSelectedEventId(event.id);
+      }
+>>>>>>> 5085a3877aabb71582c053a24e476eedd3bdc178
     }
   }
 
@@ -179,7 +192,6 @@ function Canvas({
         fromEvent: selectedEvent,
         toEvent: event,
         type: type,
-        id: crypto.randomUUID(),
       };
       saveToHistory(events, relations);
       setRelations([...relations, relation]);
@@ -188,6 +200,10 @@ function Canvas({
   }
 
   function updateRelation(relation, type) {
+<<<<<<< HEAD
+=======
+    console.log(relation);  
+>>>>>>> 5085a3877aabb71582c053a24e476eedd3bdc178
     saveToHistory(events, relations);
     const updatedRelations = relations.map((rel) => {
       if (rel.id === relation.id) {

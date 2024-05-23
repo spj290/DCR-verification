@@ -45,6 +45,37 @@ function Simulator({ events, relations, tests, setTests }) {
     });
   }
 
+<<<<<<< HEAD
+=======
+  // function simulate() {
+  //   const eventIdSet = new Set(
+  //     events.map((event) => {
+  //       return event.id;
+  //     })
+  //   );
+
+  //   const test = {
+  //     polarity: "+",
+  //     trace: trace.map((event) => event.id),
+  //     context: eventIdSet,
+  //   };
+
+  //   const bitModelPP = bitGraphToGraphPP(
+  //     bitDCRtoLabelDCR(dcrToBitDCR(convertToDCRGraph()))
+  //   );
+  //   const validSimulation = checkAlignment(test, bitModelPP, 10);
+
+  //   setsimulationCheck({
+  //     show: true,
+  //     message: validSimulation ? "Simulation successful" : "Simulation failed",
+  //     validSimulation: validSimulation,
+  //   });
+
+    setTimeout(() => {
+      setsimulationCheck({ show: false });
+    }, 3000);
+
+>>>>>>> 5085a3877aabb71582c053a24e476eedd3bdc178
   function clearSimulation() {
     setSimulatorState({
       currDCRGraph: convertToDCRGraph(events, relations),
@@ -56,6 +87,7 @@ function Simulator({ events, relations, tests, setTests }) {
     setsimulationValid(true);
     setTrace([]);
   }
+<<<<<<< HEAD
 
   function addTest() {
     setTests([
@@ -73,6 +105,8 @@ function Simulator({ events, relations, tests, setTests }) {
       },
     ]);
   }
+=======
+>>>>>>> 5085a3877aabb71582c053a24e476eedd3bdc178
 
   return (
     <div className="simulator">
@@ -100,6 +134,7 @@ function Simulator({ events, relations, tests, setTests }) {
             </div>
           ))}
         </div>
+<<<<<<< HEAD
         <button>ADD EVENT</button>
         <button style={{ marginTop: "5px" }} onClick={addTest}>
           SAVE AS TEST
@@ -107,6 +142,10 @@ function Simulator({ events, relations, tests, setTests }) {
         <button style={{ marginTop: "5px" }} onClick={clearSimulation}>
           RESET
         </button>
+=======
+        <button onClick={simulate}>Simulate</button>
+        <button onClick={clearSimulation}>Clear Simulation</button>
+>>>>>>> 5085a3877aabb71582c053a24e476eedd3bdc178
       </div>
     </div>
   );
