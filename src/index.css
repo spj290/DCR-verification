@@ -14,11 +14,19 @@ body {
 }
 
 .simulator {
-  display: grid;
-  grid-template-columns: 1fr 10vw;
-  grid-template-areas: "graph events";
+  display: flex;
+  flex-direction: row;
+  height: 88vh;
 }
-
+.simulator-canvas {
+  width: calc(100% - 210px);
+  background-color: white;
+  border-color: #006769;
+  border-style: solid;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 .canvas {
   background-color: white;
   border-radius: 10px;
@@ -141,16 +149,28 @@ body {
 
 .simulator-events {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr auto; /* Adjust to ensure proper layout */
   background-color: #f4f4f4;
   border: 1px solid #ccc;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   padding: 5px;
-  height: 100%;
+  height: 600px; /* Set a fixed height as needed */
+  overflow: hidden; /* Hide overflow on the main container */
+  width: 155px;
+  border-radius: 10px;
+  margin-right: 15px;
+  margin-left: auto;
 }
 
+.simulator-event-label-label {
+  font-family: "Poppins";
+  font-weight: 400;
+  text-align: center;
+}
 .event-list {
-  overflow-y: auto;
+  overflow-y: auto; /* Ensure the list scrolls vertically */
+  overflow-x: hidden; /* Hide horizontal overflow if not needed */
+  max-height: calc(100% - 50px); /* Adjust based on your layout */
 }
 
 .event-list div {
@@ -158,6 +178,8 @@ body {
   word-wrap: break-word;
   padding: 10px 5px;
   border-bottom: 1px solid black;
+  border-bottom-width: 2px;
+  border-radius: 5px;
 }
 
 .event-list div:hover {
