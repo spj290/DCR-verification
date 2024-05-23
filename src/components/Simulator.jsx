@@ -1,14 +1,14 @@
 import { useState } from "react";
-import checkAlignment from "../../BitDCRAlign-main/src/tdm";
 import { execute, getEnabled } from "../../BitDCRAlign-main/src/bitAlign";
 import {
   bitDCRtoLabelDCR,
   bitGraphToGraphPP,
   dcrToBitDCR,
+  bitToRegularDCR,
 } from "../../BitDCRAlign-main/src/utility";
-import { RELATION_TYPES } from "../RelationTypes";
+import { convertToDCRGraph } from "../utils";
 
-function Simulator({ events, relations }) {
+function Simulator({ events, relations, tests, setTests }) {
   const [trace, setTrace] = useState([]);
   const [simulatorState, setSimulatorState] = useState({
     currDCRGraph: convertToDCRGraph(events, relations),
@@ -17,19 +17,32 @@ function Simulator({ events, relations }) {
         ? new Set()
         : getEnabled(dcrToBitDCR(convertToDCRGraph(events, relations))),
   });
+  const [simulationValid, setsimulationValid] = useState(true);
 
   function eventClick(event) {
+    setTrace([...trace, event.label]);
+    if (!simulationValid) return;
+    if (!simulatorState.enabledEvents.has(event.label)) {
+      setsimulationValid(false);
+      return;
+    }
     const graph = bitGraphToGraphPP(
       bitDCRtoLabelDCR(dcrToBitDCR(simulatorState.currDCRGraph))
     );
-    execute(event.id, graph);
-
-    // setSimulatorState({currDCRGraph:graph["BitDCRGraph"]})
-    setSimulatorState(
-      { enabledEvents: getEnabled(graph) } // BitLabelDCRPP -> BitDCRGraph
-    );
-    setTrace([...trace, { label: event.label, id: event.id }]);
-    console.log(simulatorState);
+    execute(event.label, graph);
+    const {
+      labels,
+      labelMap,
+      labelMapInv,
+      conditions,
+      includesFor,
+      excludesFor,
+      ...DCRGraph
+    } = graph;
+    setSimulatorState({
+      currDCRGraph: bitToRegularDCR(DCRGraph),
+      enabledEvents: getEnabled(DCRGraph),
+    });
   }
 
   function clearSimulation() {
@@ -40,90 +53,32 @@ function Simulator({ events, relations }) {
           ? new Set()
           : getEnabled(dcrToBitDCR(convertToDCRGraph(events, relations))),
     });
+    setsimulationValid(true);
     setTrace([]);
   }
 
-
-  function convertToDCRGraph(events, relations) {
-    const eventIdSet = new Set(
-      events.map((event) => {
-        return event.id;
-      })
-    );
-
-    const relationTypes = {
-      conditionsFor: {},
-      milestonesFor: {},
-      responseTo: {},
-      includesTo: {},
-      excludesTo: {},
-    };
-
-    eventIdSet.forEach((eventId) => {
-      Object.values(relationTypes).forEach((relation) => {
-        relation[eventId] = new Set();
-      });
-    });
-
-    const relationsMap = {
-      [RELATION_TYPES.CONDITION]: relationTypes.conditionsFor,
-      [RELATION_TYPES.RESPONSE]: relationTypes.responseTo,
-      [RELATION_TYPES.EXCLUDE]: relationTypes.excludesTo,
-      [RELATION_TYPES.INCLUDE]: relationTypes.includesTo,
-      [RELATION_TYPES.MILESTONE]: relationTypes.milestonesFor,
-    };
-
-    relations.map((relation) => {
-      relationsMap[relation.type][relation.fromEvent.id].add(
-        relation.toEvent.id
-      );
-    });
-
-    return {
-      events: eventIdSet,
-      ...relationTypes,
-      marking: {
-        executed: new Set(),
-        included: eventIdSet,
-        pending: new Set(),
+  function addTest() {
+    setTests([
+      ...tests,
+      {
+        name: `Test${tests.length + 1}`,
+        polarity: "+",
+        trace: trace,
+        context: new Set(
+          events.map((event) => {
+            return event.label;
+          })
+        ),
+        status: true,
       },
-    };
+    ]);
   }
-
-  // function simulate() {
-  //   const eventIdSet = new Set(
-  //     events.map((event) => {
-  //       return event.id;
-  //     })
-  //   );
-
-  //   const test = {
-  //     polarity: "+",
-  //     trace: trace.map((event) => event.id),
-  //     context: eventIdSet,
-  //   };
-
-  //   const bitModelPP = bitGraphToGraphPP(
-  //     bitDCRtoLabelDCR(dcrToBitDCR(convertToDCRGraph()))
-  //   );
-  //   const validSimulation = checkAlignment(test, bitModelPP, 10);
-
-  //   setsimulationCheck({
-  //     show: true,
-  //     message: validSimulation ? "Simulation successful" : "Simulation failed",
-  //     validSimulation: validSimulation,
-  //   });
-
-  //   setTimeout(() => {
-  //     setsimulationCheck({ show: false });
-  //   }, 3000);
-  // }
 
   return (
     <div className="simulator">
       <div className="simulator-canvas">
         {trace.map((event) => (
-          <div>{event.label}</div>
+          <div>{event}</div>
         ))}
       </div>
       <div className="simulator-events">
@@ -133,28 +88,26 @@ function Simulator({ events, relations }) {
             <div
               key={index}
               onClick={() => eventClick(event)}
-              style={{
-                color: simulatorState.enabledEvents.has(event.id)
-                  ? "green"
-                  : "red",
-              }}
+              className={
+                !simulationValid
+                  ? "neutral"
+                  : simulatorState.enabledEvents.has(event.label)
+                  ? "enabled"
+                  : "disabled"
+              }
             >
               {event.label}
             </div>
           ))}
         </div>
-        <button onClick={eventClick}>Simulate</button>
-        <button onClick={clearSimulation}>Clear Simulation</button>
+        <button>ADD EVENT</button>
+        <button style={{ marginTop: "5px" }} onClick={addTest}>
+          SAVE AS TEST
+        </button>
+        <button style={{ marginTop: "5px" }} onClick={clearSimulation}>
+          RESET
+        </button>
       </div>
-      {/* {simulationCheck.show && (
-        <div
-          className={`simulation-check ${
-            simulationCheck.validSimulation ? "success" : "failure"
-          }`}
-        >
-          {simulationCheck.message}
-        </div>
-      )} */}
     </div>
   );
 }

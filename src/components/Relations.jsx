@@ -1,12 +1,8 @@
 import { Arrow } from "react-konva";
 import { RELATION_TYPES } from "../RelationTypes";
 
-function Relations({ relations, setArrowEndpoints, handleRelationClick}) {
+function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
   function setArrowEndpoints(fromEvent, toEvent, type) {
-    if (type === RELATION_TYPES.CONDITION) {
-      [fromEvent, toEvent] = [toEvent, fromEvent];
-    }
-    
     const shift =
       type === RELATION_TYPES.CONDITION
         ? 0
@@ -54,32 +50,31 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick}) {
     let toArrowX = toX;
     let toArrowY = toY;
 
-
-    if (angle <= 0.25*Math.PI && angle >= -0.25*Math.PI){ // Right Side
+    if (angle <= 0.25 * Math.PI && angle >= -0.25 * Math.PI) {
+      // Right Side
       fromArrowY = fromY + shift;
-      fromArrowX = fromX + eventWidth/2;
-      toArrowX = toX - eventWidth/2;
+      fromArrowX = fromX + eventWidth / 2;
+      toArrowX = toX - eventWidth / 2;
       toArrowY = toY + shift;
-    }
-    else if (angle >= 0.25*Math.PI && angle <= 0.75*Math.PI){ // Bottom Side
+    } else if (angle >= 0.25 * Math.PI && angle <= 0.75 * Math.PI) {
+      // Bottom Side
       fromArrowX = fromX + shift;
-      fromArrowY = fromY + eventHeight/2;
-      toArrowY = toY - eventHeight/2;
+      fromArrowY = fromY + eventHeight / 2;
+      toArrowY = toY - eventHeight / 2;
       toArrowX = toX + shift;
-    }
-    else if (angle <= -0.25*Math.PI && angle >= -0.75*Math.PI){ // Top Side
+    } else if (angle <= -0.25 * Math.PI && angle >= -0.75 * Math.PI) {
+      // Top Side
       fromArrowX = fromX + shift;
-      fromArrowY = fromY - eventHeight/2;
+      fromArrowY = fromY - eventHeight / 2;
       toArrowX = toX + shift;
-      toArrowY = toY + eventHeight/2;
-    }
-    else if (angle >= 0.75*Math.PI || angle <= -0.75*Math.PI){ // Left Side
-      fromArrowX = fromX - eventWidth/2;
+      toArrowY = toY + eventHeight / 2;
+    } else if (angle >= 0.75 * Math.PI || angle <= -0.75 * Math.PI) {
+      // Left Side
+      fromArrowX = fromX - eventWidth / 2;
       fromArrowY = fromY + shift;
-      toArrowX = toX + eventWidth/2;
+      toArrowX = toX + eventWidth / 2;
       toArrowY = toY + shift;
-    }
-    else {
+    } else {
       console.warn("Invalid Angle Value in setArrowEndpoints() function.");
     }
 
