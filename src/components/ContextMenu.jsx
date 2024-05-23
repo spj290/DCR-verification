@@ -1,12 +1,12 @@
 import { RELATION_TYPES } from "../RelationTypes";
-
+import "../styles/contextmenu.css";
 function ContextMenu({
-    contextMenu,
-    addRelation,
-    udpateRelation,
-    deleteRelation,
-    deleteEvent,
-  }) {
+  contextMenu,
+  addRelation,
+  udpateRelation,
+  deleteRelation,
+  deleteEvent,
+}) {
   return (
     <div
       className="context-menu"
@@ -25,18 +25,21 @@ function ContextMenu({
             contextMenu.event
               ? () => addRelation(contextMenu.event, type)
               : () => udpateRelation(contextMenu.relation, type)
-          }>
+          }
+        >
           {type}
         </div>
       ))}
-      <div onClick={
-        // if contextMenu.relation is not null, delete relation
-        // else if contextMenu.event is not null, delete event
-        // else do nothing
-        contextMenu.relation
-          ? () => deleteRelation(contextMenu.relation)
-          : () => deleteEvent(contextMenu.event)
-      }>
+      <div
+        onClick={
+          // if contextMenu.relation is not null, delete relation
+          // else if contextMenu.event is not null, delete event
+          // else do nothing
+          contextMenu.relation
+            ? () => deleteRelation(contextMenu.relation)
+            : () => deleteEvent(contextMenu.event)
+        }
+      >
         Delete
       </div>
     </div>
