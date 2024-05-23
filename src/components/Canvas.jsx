@@ -67,6 +67,7 @@ function Canvas({
     };
   }, []);
 
+  // Delete event, undo, redo, and keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "z") {
@@ -92,7 +93,7 @@ function Canvas({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleUndo, handleRedo]);
+  }, [handleUndo, handleRedo, selectedEventId]);
 
   function addEvent(e) {
     e.evt.preventDefault();
@@ -179,6 +180,7 @@ function Canvas({
         fromEvent: selectedEvent,
         toEvent: event,
         type: type,
+        id: crypto.randomUUID(),
       };
       saveToHistory(events, relations);
       setRelations([...relations, relation]);
@@ -187,7 +189,6 @@ function Canvas({
   }
 
   function updateRelation(relation, type) {
-    //console.log(relation);  
     saveToHistory(events, relations);
     const updatedRelations = relations.map((rel) => {
       if (rel.id === relation.id) {

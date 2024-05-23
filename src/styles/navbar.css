@@ -1,0 +1,13 @@
+.test-status {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.test-passed {
+  background-color: grey;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  margin-left: 5px;
+}
