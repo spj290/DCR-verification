@@ -18,10 +18,6 @@ function Events({
     }
   }
 
-  // function handleIsExecuted(event) {
-  //   if (event.exe)
-  // }
-
   return (
     <>
       {events.map((event) => (
