@@ -6,6 +6,7 @@ import ContextMenu from "./ContextMenu";
 
 function Canvas({
   sidebarActive,
+  testsActive,
   setSidebarActive,
   events,
   setEvents,
@@ -17,6 +18,7 @@ function Canvas({
   const [contextMenu, setContextMenu] = useState(null);
   const [history, setHistory] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Function to save current state to history
   const saveToHistory = (currentEvents, currentRelations) => {
@@ -53,6 +55,19 @@ function Canvas({
   }, [redoStack, events, relations]);
 
   useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "z") {
         e.preventDefault();
@@ -60,6 +75,14 @@ function Canvas({
       } else if ((e.ctrlKey || e.metaKey) && e.key === "y") {
         e.preventDefault();
         handleRedo();
+      } else if (e.key === "Delete" || e.key === "Backspace") {
+        e.preventDefault();
+        if (selectedEventId) {
+          const eventToDelete = events.find(
+            (event) => event.id === selectedEventId
+          );
+          deleteEvent(eventToDelete);
+        }
       }
     };
 
@@ -115,13 +138,10 @@ function Canvas({
 
   function handleEventClick(e, event) {
     if (e.evt.button === 0) {
-      if (selectedEventId === event.id) {
-        setSidebarActive(false);
-        setSelectedEventId(null);
-      } else {
-        setSidebarActive(true);
-        setSelectedEventId(event.id);
-      }
+      // Left click
+      setSelectedEventId(event.id);
+      setSidebarActive(true);
+      setContextMenu(null);
     }
   }
 
@@ -129,7 +149,7 @@ function Canvas({
     // create dropdown menu to change relation type or delete relation
     e.evt.preventDefault();
     e.cancelBubble = true;
-    
+
     const position = {
       x: e.target.getStage().getPointerPosition().x,
       y: e.target.getStage().getPointerPosition().y,
@@ -167,7 +187,7 @@ function Canvas({
   }
 
   function updateRelation(relation, type) {
-    console.log(relation);  
+    //console.log(relation);  
     saveToHistory(events, relations);
     const updatedRelations = relations.map((rel) => {
       if (rel.id === relation.id) {
@@ -178,14 +198,12 @@ function Canvas({
     setRelations(updatedRelations);
     setContextMenu(null);
   }
-    function deleteRelation(relation) {
-      saveToHistory(events, relations);
-      const updatedRelations = relations.filter(
-        (rel) => rel.id !== relation.id
-      );
-      setRelations(updatedRelations);
-      setContextMenu(null);
-    }
+  function deleteRelation(relation) {
+    saveToHistory(events, relations);
+    const updatedRelations = relations.filter((rel) => rel.id !== relation.id);
+    setRelations(updatedRelations);
+    setContextMenu(null);
+  }
 
   function updateState(e, dragEvent) {
     const updatedEvents = events.map((event) => {
@@ -237,14 +255,14 @@ function Canvas({
       setSelectedEventId(null);
       setContextMenu(null);
     }
-  }
+  };
 
   return (
     <>
       <Stage
         className="canvas"
-        width={window.innerWidth * (sidebarActive ? 0.9 : 1)}
-        height={window.innerHeight - 40}
+        width={windowWidth - (sidebarActive || testsActive ? 220 : 35)}
+        height={window.innerHeight - 90}
         draggable
         onClick={handleStageClick()}
         onContextMenu={addEvent}
@@ -259,9 +277,9 @@ function Canvas({
             handleDragEnd={handleDragStartEnd}
             handleDragStart={handleDragStartEnd}
           />
-          <Relations 
-          relations={relations}
-          handleRelationClick={handleRelationClick}
+          <Relations
+            relations={relations}
+            handleRelationClick={handleRelationClick}
           />
         </Layer>
       </Stage>
