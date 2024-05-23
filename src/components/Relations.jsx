@@ -42,8 +42,16 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
       ];
     }
 
-    const angle = Math.atan2(toY - fromY, toX - fromX);
-
+    const angle =
+      shift === 0
+        ? Math.atan2(toY - fromY, toX - fromX)
+        : shift === 10
+        ? Math.atan2(toY - fromY, toX - fromX)
+        : shift === -10
+        ? Math.atan2(toY - fromY, toX - fromX)
+        : shift === -20
+        ? Math.atan2(toY - fromY, toX - fromX)
+        : Math.atan2(toY - fromY, toX - fromX);
     // let fromArrowX = fromX + (Math.cos(angle) * eventWidth) / 2;
     // let fromArrowY = fromY + (Math.sin(angle) * eventHeight) / 2;
     // let toArrowX = toX - (Math.cos(angle) * eventWidth) / 2;
@@ -77,9 +85,9 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
     } else if (angle >= 0.75 * Math.PI || angle <= -0.75 * Math.PI) {
       // Left Side
       fromArrowX = fromX - eventWidth / 2;
-      fromArrowY = (Math.tan(angle) * -eventWidth) / 2 + fromY + shift;
+      fromArrowY = (Math.tan(angle) * -eventWidth) / 2 + fromY - shift;
       toArrowX = toX + eventWidth / 2;
-      toArrowY = (Math.tan(angle) * eventWidth) / 2 + toY + shift;
+      toArrowY = (Math.tan(angle) * eventWidth) / 2 + toY - shift;
     } else {
       console.warn("Invalid Angle Value in setArrowEndpoints() function.");
     }

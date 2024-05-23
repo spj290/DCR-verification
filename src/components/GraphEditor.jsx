@@ -1,8 +1,8 @@
 import Canvas from "./Canvas";
 import RightSidebar from "./RightSidebar";
+import TestsSidebar from "./TestsSidebar";
 import { useState } from "react";
 import "../styles/grapheditor.css";
-import TestsSidebar from "./TestsSidebar";
 
 function GraphEditor({
   events,
@@ -11,7 +11,6 @@ function GraphEditor({
   setRelations,
   testsActive,
   tests,
-  setTestsActive,
 }) {
   const [sidebarActive, setSidebarActive] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
@@ -39,7 +38,6 @@ function GraphEditor({
           setSelectedEventId={setSelectedEventId}
           relations={relations}
           setRelations={setRelations}
-          setTestsActive={setTestsActive}
         />
       </div>
       <div>
@@ -51,7 +49,6 @@ function GraphEditor({
               selectedEventId={selectedEventId}
               events={events}
               updateEventLabel={updateEventLabel}
-              setEvents={setEvents}
             />
           )
         )}
