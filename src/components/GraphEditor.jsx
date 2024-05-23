@@ -49,6 +49,7 @@ function GraphEditor({
               selectedEventId={selectedEventId}
               events={events}
               updateEventLabel={updateEventLabel}
+              setEvents={setEvents}
             />
           )
         )}
