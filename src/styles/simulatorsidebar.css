@@ -1,0 +1,69 @@
+.simulator-events {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 5px 5px 0 5px;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  width: 180px;
+  margin-right: 15px;
+}
+
+.simulator-event-label-label {
+  font-weight: 400;
+  text-align: center;
+}
+.event-list {
+  overflow-y: auto; /* Ensure the list scrolls vertically */
+  overflow-x: hidden; /* Hide horizontal overflow if not needed */
+  max-height: calc(100% - 20px); /* Adjust based on your layout */
+}
+
+.event-list div {
+  cursor: pointer;
+  word-wrap: break-word;
+  padding: 10px 5px;
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  border-bottom-width: 2px;
+  border-radius: 20px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.event-list div:hover {
+  background-color: lightgrey;
+}
+
+.simulation-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5vw;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.enabled {
+  background-color: lightgreen;
+}
+.enabled:hover {
+  background-color: rgb(10, 100, 10);
+}
+
+.disabled {
+  background-color: lightcoral;
+}
+
+.disabled:hover {
+  background-color: rgb(200, 10, 10);
+}
+
+.neutral:hover {
+  background-color: lightgrey;
+}

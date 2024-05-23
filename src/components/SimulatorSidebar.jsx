@@ -1,3 +1,5 @@
+import "../styles/simulatorsidebar.css";
+
 function SimulatorSidebar({
   events,
   simulatorState,
