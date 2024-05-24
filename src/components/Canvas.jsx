@@ -287,6 +287,9 @@ function Canvas({
       {contextMenu && (
         <ContextMenu
           contextMenu={contextMenu}
+          relations={relations}
+          events={events}
+          selectedEventId={selectedEventId}
           addRelation={addRelation}
           deleteEvent={deleteEvent}
           udpateRelation={updateRelation}
