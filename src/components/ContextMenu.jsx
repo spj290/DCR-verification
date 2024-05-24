@@ -12,7 +12,7 @@ function ContextMenu({
 }) {
 
   const isDisabled = (type) => {
-    return relations.some(relation => contextMenu.event !== null && relation.toEvent.id === contextMenu.event.id && relation.fromEvent.id === selectedEventId && relation.type === type);
+    return relations.some(relation => contextMenu.event != null && relation.toEvent.id === contextMenu.event.id && relation.fromEvent.id === selectedEventId && relation.type === type);
   };
 
   return (
