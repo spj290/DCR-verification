@@ -1,19 +1,22 @@
 import "../styles/simulatorsidebar.css";
 
 function SimulatorSidebar({
-  events,
+  simulatorEvents,
+  customEvents,
   simulatorState,
   simulationValid,
   eventClick,
+  customClick,
   clearSimulation,
   addTest,
+  addCustomEvent,
 }) {
   return (
     <>
       <div className="simulator-events">
         <h3 className="simulator-event-label-label">Event Labels</h3>
         <div className="event-list">
-          {events.map((event, index) => (
+          {simulatorEvents.map((event, index) => (
             <div
               key={index}
               onClick={() => eventClick(event)}
@@ -28,10 +31,19 @@ function SimulatorSidebar({
               {event.label}
             </div>
           ))}
+          {customEvents.map((event, index) => (
+            <div
+              key={index}
+              onClick={() => customClick(event)}
+              className={!simulationValid ? "neutral" : "disabled"}
+            >
+              {event.label}
+            </div>
+          ))}
         </div>
       </div>
       <div className="button-container">
-        <button className="default-button-style" onClick={addTest}>
+        <button className="default-button-style" onClick={addCustomEvent}>
           ADD EVENT
         </button>
         <button
