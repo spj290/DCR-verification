@@ -111,6 +111,11 @@ function Canvas({
       position: position,
       id: crypto.randomUUID(),
       label: `Event${events.length + 1}`,
+      // marking: marking,
+      marking: {pending: false,
+                included: true,
+                executed: false},
+      temp: true
     };
     saveToHistory(events, relations);
     setEvents([...events, event]);
@@ -277,6 +282,7 @@ function Canvas({
             handleEventRightClick={handleEventRightClick}
             handleDragEnd={handleDragStartEnd}
             handleDragStart={handleDragStartEnd}
+            // setEvents={setEvents}
           />
           <Relations
             relations={relations}
