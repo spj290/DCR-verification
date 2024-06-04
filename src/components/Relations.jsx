@@ -61,11 +61,11 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
     let fromArrowY = fromY;
     let toArrowX = toX;
     let toArrowY = toY;
-    console.log(angle);
+    // console.log(angle);
 
     if (angle <= 0.25 * Math.PI && angle >= -0.25 * Math.PI) {
       // Right Side
-      console.log("Right Side");
+      // console.log("Right Side");
       fromArrowY = (Math.tan(angle) * eventWidth) / 2 + fromY + shift;
       fromArrowX = fromX + eventWidth / 2;
       toArrowX = toX - eventWidth / 2;
