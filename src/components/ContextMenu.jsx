@@ -10,9 +10,14 @@ function ContextMenu({
   deleteRelation,
   deleteEvent,
 }) {
-
   const isDisabled = (type) => {
-    return relations.some(relation => contextMenu.event != null && relation.toEvent.id === contextMenu.event.id && relation.fromEvent.id === selectedEventId && relation.type === type);
+    return relations.some(
+      (relation) =>
+        contextMenu.event != null &&
+        relation.toEvent.id === contextMenu.event.id &&
+        relation.fromEvent.id === selectedEventId &&
+        relation.type === type
+    );
   };
 
   return (
@@ -25,24 +30,26 @@ function ContextMenu({
     >
       {Object.values(RELATION_TYPES).map((type) => {
         const disabled = isDisabled(type);
-        
+
         return (
           <div
+            className="context-menu-item"
             key={type}
             onClick={
               // if contextMenu.event is not null, add relation
               // else if contextMenu.relation is not null, update relation type
               // else do nothing
-              disabled ? null
-              : contextMenu.event
+              disabled
+                ? null
+                : contextMenu.event
                 ? () => addRelation(contextMenu.event, type)
                 : () => udpateRelation(contextMenu.relation, type)
             }
-            style={{ 
-              pointerEvents: disabled ? 'none' : 'auto', 
+            style={{
+              pointerEvents: disabled ? "none" : "auto",
               opacity: disabled ? 0.5 : 1,
-              cursor: disabled ? 'not-allowed' : 'pointer',
-              color: disabled ? '#aaa' : 'inherit',
+              cursor: disabled ? "not-allowed" : "pointer",
+              color: disabled ? "#aaa" : "black",
             }}
           >
             {type}
@@ -50,6 +57,7 @@ function ContextMenu({
         );
       })}
       <div
+        className="context-menu-item"
         onClick={
           // if contextMenu.relation is not null, delete relation
           // else if contextMenu.event is not null, delete event

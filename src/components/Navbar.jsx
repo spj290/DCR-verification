@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import FileManager from "./FileManager";
 import DropDownMenu from "./DropDownMenu";
 import "../styles/navbar.css";
@@ -19,12 +19,12 @@ function Navbar({
   return (
     <nav className="navbar">
       <h1 className="navbar-title">DCR-Tool</h1>
-      <Link className="links" to="/">
+      <NavLink activeClassName="active" className="links" to="/">
         EDITOR
-      </Link>
-      <Link className="links" to="/simulator">
+      </NavLink>
+      <NavLink activeClassName="active" className="links" to="/simulator">
         SIMULATOR
-      </Link>
+      </NavLink>
       <div className="links" onClick={() => setTestsActive(!testsActive)}>
         TESTS
       </div>
