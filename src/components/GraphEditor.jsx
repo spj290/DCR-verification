@@ -1,8 +1,8 @@
 import Canvas from "./Canvas";
 import RightSidebar from "./RightSidebar";
+import TestsSidebar from "./TestsSidebar";
 import { useState } from "react";
 import "../styles/grapheditor.css";
-import TestsSidebar from "./TestsSidebar";
 
 function GraphEditor({
   events,

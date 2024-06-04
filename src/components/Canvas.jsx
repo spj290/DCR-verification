@@ -262,7 +262,7 @@ function Canvas({
     <>
       <Stage
         className="canvas"
-        width={windowWidth - (sidebarActive || testsActive ? 220 : 35)}
+        width={windowWidth - (sidebarActive || testsActive ? 240 : 45)}
         height={window.innerHeight - 90}
         draggable
         onClick={handleStageClick()}
@@ -287,6 +287,9 @@ function Canvas({
       {contextMenu && (
         <ContextMenu
           contextMenu={contextMenu}
+          relations={relations}
+          events={events}
+          selectedEventId={selectedEventId}
           addRelation={addRelation}
           deleteEvent={deleteEvent}
           udpateRelation={updateRelation}

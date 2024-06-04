@@ -26,9 +26,14 @@ function Events({
           <Rect
             width={80}
             height={100}
-            fill="beige"
-            stroke={selectedEventId === event.id ? "dodgerBlue" : "grey"}
-            strokeWidth={selectedEventId === event.id ? 4 : 2}
+            fill="#f9f9f9"
+            stroke={selectedEventId === event.id ? "lightblue" : "white"}
+            strokeWidth={selectedEventId === event.id ? 3 : 0}
+            cornerRadius={15}
+            shadowBlur={2}
+            shadowOffsetX={2}
+            shadowOffsetY={2}
+            shadowOpacity={0.2}
           />
           <Text
             text={event.label}
@@ -37,6 +42,8 @@ function Events({
             align="center"
             verticalAlign="middle"
             wrap="word"
+            fontSize={16}
+            fontFamily="sans-serif"
           />
         </Group>
       ))}

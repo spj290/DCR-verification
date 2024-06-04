@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "../styles/rightSidebar.css";
 
 function RightSidebar({ selectedEventId, events, updateEventLabel }) {
   const [newLabel, setNewLabel] = useState("");

@@ -2,15 +2,16 @@
 
 body {
   overflow: hidden;
-  font-family: "Poppins";
+  font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   display: block;
   margin: 5px;
 }
 
 .app {
-  display: grid;
-  grid-template-columns: 1fr 25vw;
-  grid-template-areas: "main right";
+  display: flex;
+  flex-direction: row;
 }
 
 .simulator {
@@ -24,35 +25,17 @@ body {
   border-radius: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  box-shadow: inset 1px 1px 5px rgba(166, 175, 195, 0.5);
   border: lightgrey 1px solid;
 }
 .canvas {
   background-color: white;
   border-radius: 10px;
   margin-bottom: 10px;
-  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  box-shadow: inset 1px 1px 5px rgba(166, 175, 195, 0.5);
   border: lightgrey 1px solid;
   margin-left: 10px;
-  margin-right: 10px;
-}
-
-.context-menu {
-  position: absolute;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  padding: 5px;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.context-menu div {
-  cursor: pointer;
-  margin-bottom: 5px;
-}
-
-.context-menu div:hover {
-  background-color: #f0f0f0;
+  margin-right: 12px;
 }
 
 .right-sidebar {
@@ -60,8 +43,8 @@ body {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px;
-  width: 150px;
-  margin-left: 5px;
+  width: 170px;
+  margin-right: 15px;
 }
 
 .input-field {
@@ -116,7 +99,7 @@ body {
 }
 
 .links {
-  background-color: #fff;
+  background-color: #f9f9f9;
   border: 0 solid #e2e8f0;
   border-radius: 1.5rem;
   box-sizing: border-box;
@@ -146,45 +129,6 @@ body {
   color: #fff;
 }
 
-.simulator-events {
-  display: grid;
-  grid-template-rows: auto 1fr auto; /* Adjust to ensure proper layout */
-  background-color: #f4f4f4;
-  border: 1px solid #ccc;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 5px;
-  height: 600px; /* Set a fixed height as needed */
-  overflow: hidden; /* Hide overflow on the main container */
-  width: 155px;
-  border-radius: 10px;
-  margin-right: 15px;
-  margin-left: auto;
-}
-
-.simulator-event-label-label {
-  font-family: "Poppins";
-  font-weight: 400;
-  text-align: center;
-}
-.event-list {
-  overflow-y: auto; /* Ensure the list scrolls vertically */
-  overflow-x: hidden; /* Hide horizontal overflow if not needed */
-  max-height: calc(100% - 20px); /* Adjust based on your layout */
-}
-
-.event-list div {
-  cursor: pointer;
-  word-wrap: break-word;
-  padding: 10px 5px;
-  border-bottom: 1px solid black;
-  border-bottom-width: 2px;
-  border-radius: 5px;
-}
-
-.event-list div:hover {
-  background-color: lightgrey;
-}
-
 .simulation-check {
   position: absolute;
   top: 50%;
@@ -198,21 +142,33 @@ body {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.enabled {
-  background-color: green;
-}
-.enabled:hover {
-  background-color: rgb(10, 100, 10);
+.default-button-style {
+  background-color: #f9f9f9;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 200;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  z-index: 1000;
 }
 
-.disabled {
-  background-color: red;
-}
-
-.disabled:hover {
-  background-color: rgb(200, 10, 10);
-}
-
-.neutral:hover {
-  background-color: lightgrey;
+.default-button-style:hover {
+  background-color: #1e293b;
+  color: #fff;
 }

@@ -15,6 +15,7 @@ function Navbar({
   setTestsActive,
 }) {
   const [openDropdown, setOpenDropdown] = useState(false);
+
   return (
     <nav className="navbar">
       <h1 className="navbar-title">DCR-Tool</h1>
@@ -27,27 +28,36 @@ function Navbar({
       <div className="links" onClick={() => setTestsActive(!testsActive)}>
         TESTS
       </div>
-      <button
-        className="links"
-        onMouseEnter={() => setOpenDropdown((prev) => !prev)}
+      <div
+        className="options-menu"
+        onMouseEnter={() => setOpenDropdown(true)}
+        onMouseLeave={() => setOpenDropdown(false)}
       >
-        OPTIONS
-      </button>
+        <button className="options-button">OPTIONS</button>
+        {openDropdown && (
+          <DropDownMenu
+            className={openDropdown ? "dropdown-open" : "dropdown-close"}
+            setEvents={setEvents}
+            setRelations={setRelations}
+          />
+        )}
+      </div>
+
       <div className="test-status">
         <span>Tests Passed: </span>
         <div
           className="test-passed"
           style={{
             backgroundColor: `${
-              tests.every((test) => test.status) ? "green" : "red"
+              tests.every((test) => test.status) ? "lightgreen" : "red"
+            }`,
+            boxShadow: `0 0 5px 1px ${
+              tests.every((test) => test.status) ? "lightgreen" : "red"
             }`,
           }}
         ></div>
       </div>
 
-      {openDropdown && (
-        <DropDownMenu onMouseLeave={() => setOpenDropdown((prev) => !prev)} />
-      )}
       <FileManager
         events={events}
         relations={relations}
