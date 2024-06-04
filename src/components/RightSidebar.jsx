@@ -4,8 +4,6 @@ import "../styles/rightSidebar.css";
 function RightSidebar({ selectedEventId, events, updateEventLabel, setEvents }) {
   const [newLabel, setNewLabel] = useState("");
 
-  // const selectedEvent = 
-  //   events.find((event) => event.id === selectedEventId)
 
   useEffect(() => {
     if (selectedEventId) {
@@ -29,9 +27,6 @@ function RightSidebar({ selectedEventId, events, updateEventLabel, setEvents }) 
         event.id === selectedEventId
           ? {...event, marking: {...event.marking, pending: !event.marking.pending}}
           : event))
-    // setEvents([...events, {selectedEvent, pending: true}]);//!selectedEvent.marking.pending})
-    // setEvents();
-    // setEvents(ev)
   }
 
   function handleIncluded() {
@@ -49,6 +44,11 @@ function RightSidebar({ selectedEventId, events, updateEventLabel, setEvents }) 
           ? {...event, marking: {...event.marking, executed: !event.marking.executed}}
           : event))
   }
+  function handleKeyDown(e) {
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+      e.stopPropagation();
+    }
+  }
 
   return (
     <div className="right-sidebar">
@@ -58,6 +58,7 @@ function RightSidebar({ selectedEventId, events, updateEventLabel, setEvents }) 
           type="text"
           value={newLabel}
           onChange={updateLabel}
+          onKeyDown={handleKeyDown}
           id="inputField"
           className="input-field"
         />
