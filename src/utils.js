@@ -33,7 +33,7 @@ export function convertToDCRGraph(events, relations) {
     };
 
     relations.map((relation) => {
-      if (relation.type == RELATION_TYPES.CONDITION) 
+      if (relation.type == RELATION_TYPES.CONDITION || relation.type == RELATION_TYPES.MILESTONE) 
         relationsMap[relation.type][relation.toEvent.label].add(
           relation.fromEvent.label
     );
