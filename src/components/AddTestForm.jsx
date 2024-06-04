@@ -8,10 +8,19 @@ function AddTestForm({
   handleAddTestSubmit,
   handleContextEventChange,
 }) {
+
+  function closeForm() {
+    setFormState(prevState => ({
+      ...prevState,
+      showTestForm: false
+    }));
+  }
+
   return (
     <>
       {formState.showTestForm && (
         <form onSubmit={handleAddTestSubmit} className="simulator-form">
+          <button onClick={closeForm} style={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'red' }}>X</button>
           <input
             type="text"
             placeholder="Test Name"
