@@ -27,8 +27,9 @@ function Events({
             width={80}
             height={100}
             fill="#f9f9f9"
-            stroke={selectedEventId === event.id ? "lightblue" : "white"}
-            strokeWidth={selectedEventId === event.id ? 3 : 0}
+            stroke={selectedEventId === event.id ? "lightblue" : "lightgrey"}
+            strokeWidth={selectedEventId === event.id ? 3 : 2}
+            dash={event.marking.included ? [1,0] : [5,5]}
             cornerRadius={15}
             shadowBlur={2}
             shadowOffsetX={2}
@@ -44,6 +45,22 @@ function Events({
             wrap="word"
             fontSize={16}
             fontFamily="sans-serif"
+          />
+          <Text
+            text={event.marking.pending ? "!" : ""}
+            fontSize={20}
+            fontStyle="bold"
+            fill="blue"
+            offsetX={-5}
+            offsetY={-5}
+          />
+          <Text
+            text={event.marking.executed ? "✓" : ""}
+            fontSize={20}
+            fontStyle="bold"
+            fill="green"
+            offsetX={-55}
+            offsetY={-5}
           />
         </Group>
       ))}
