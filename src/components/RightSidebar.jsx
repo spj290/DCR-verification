@@ -20,6 +20,12 @@ function RightSidebar({ selectedEventId, events, updateEventLabel }) {
     e.preventDefault();
   }
 
+  function handleKeyDown(e) {
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+      e.stopPropagation();
+    }
+  }
+
   return (
     <div className="right-sidebar">
       <form onSubmit={handleSubmit}>
@@ -28,6 +34,7 @@ function RightSidebar({ selectedEventId, events, updateEventLabel }) {
           type="text"
           value={newLabel}
           onChange={updateLabel}
+          onKeyDown={handleKeyDown}
           id="inputField"
           className="input-field"
         />
