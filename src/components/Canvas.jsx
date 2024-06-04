@@ -111,6 +111,11 @@ function Canvas({
       position: position,
       id: crypto.randomUUID(),
       label: `Event${events.length + 1}`,
+      // marking: marking,
+      marking: {pending: false,
+                included: true,
+                executed: false},
+      temp: true
     };
     saveToHistory(events, relations);
     setEvents([...events, event]);
@@ -262,7 +267,7 @@ function Canvas({
     <>
       <Stage
         className="canvas"
-        width={windowWidth - (sidebarActive || testsActive ? 220 : 35)}
+        width={windowWidth - (sidebarActive || testsActive ? 240 : 45)}
         height={window.innerHeight - 90}
         draggable
         onClick={handleStageClick()}
@@ -277,6 +282,7 @@ function Canvas({
             handleEventRightClick={handleEventRightClick}
             handleDragEnd={handleDragStartEnd}
             handleDragStart={handleDragStartEnd}
+            // setEvents={setEvents}
           />
           <Relations
             relations={relations}
@@ -287,6 +293,9 @@ function Canvas({
       {contextMenu && (
         <ContextMenu
           contextMenu={contextMenu}
+          relations={relations}
+          events={events}
+          selectedEventId={selectedEventId}
           addRelation={addRelation}
           deleteEvent={deleteEvent}
           udpateRelation={updateRelation}
