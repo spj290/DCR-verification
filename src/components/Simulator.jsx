@@ -159,10 +159,8 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
           <div key={index}>{event}</div>
         ))}
       </div>
-      <div>
-        {testsActive ? (
-          <TestsSidebar tests={tests} />
-        ) : (
+      <div className="sidebar-container">
+        <div>
           <SimulatorSidebar
             simulatorEvents={simulatorEvents}
             customEvents={customEvents}
@@ -174,21 +172,22 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
             addTest={addTest}
             addCustomEvent={addCustomEvent}
           />
-        )}
+          <AddEventForm
+            formState={formState}
+            setFormState={setFormState}
+            handleAddEventSubmit={handleAddEventSubmit}
+          />
+          <AddTestForm
+            simulatorEvents={simulatorEvents}
+            customEvents={customEvents}
+            formState={formState}
+            setFormState={setFormState}
+            handleAddTestSubmit={handleAddTestSubmit}
+            handleContextEventChange={handleContextEventChange}
+          />
+        </div>
+        {testsActive && <TestsSidebar tests={tests} />}
       </div>
-      <AddEventForm
-        formState={formState}
-        setFormState={setFormState}
-        handleAddEventSubmit={handleAddEventSubmit}
-      />
-      <AddTestForm
-        simulatorEvents={simulatorEvents}
-        customEvents={customEvents}
-        formState={formState}
-        setFormState={setFormState}
-        handleAddTestSubmit={handleAddTestSubmit}
-        handleContextEventChange={handleContextEventChange}
-      />
     </div>
   );
 }

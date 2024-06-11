@@ -18,7 +18,7 @@ function GraphEditor({
   function updateEventLabel(eventId, newLabel) {
     const updatedEvents = events.map((event) => {
       if (event.id === eventId) {
-        return { ...event, label: newLabel};
+        return { ...event, label: newLabel };
       }
       return event;
     });
@@ -40,19 +40,16 @@ function GraphEditor({
           setRelations={setRelations}
         />
       </div>
-      <div>
-        {testsActive ? (
-          <TestsSidebar tests={tests} />
-        ) : (
-          sidebarActive && (
-            <RightSidebar
-              selectedEventId={selectedEventId}
-              events={events}
-              updateEventLabel={updateEventLabel}
-              setEvents={setEvents}
-            />
-          )
+      <div className="sidebar-container">
+        {sidebarActive && (
+          <RightSidebar
+            selectedEventId={selectedEventId}
+            events={events}
+            updateEventLabel={updateEventLabel}
+            setEvents={setEvents}
+          />
         )}
+        {testsActive && <TestsSidebar tests={tests} />}
       </div>
     </div>
   );
