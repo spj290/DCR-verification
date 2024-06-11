@@ -122,8 +122,8 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
         // change these to adjust the position of the symbols in relation to the arrow
         const fromOffsetX = 5;
         const fromOffsetY = 5;
-        const toOffsetX = 0;
-        const toOffsetY = 0;
+        const toOffsetX = -7.5;
+        const toOffsetY = -9;
 
         const FromSymbolPos = {
           x: points[0]-fromOffsetX*offsetDirection[side][0],
@@ -135,8 +135,8 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
         };
 
         
-        const arrowLengthFactorFrom = 1; // Change this to adjust the length of the arrow. Greater value means shorter arrow from origin
-        const arrowLengthFactorTo = 1; // Change this to adjust the length of the arrow. Greater value means shorter arrow from destination
+        const arrowLengthFactorFrom = 0.8; // Change this to adjust the length of the arrow. Greater value means shorter arrow from origin
+        const arrowLengthFactorTo = 1.8; // Change this to adjust the length of the arrow. Greater value means shorter arrow from destination
         points[points.length - 4] = points[points.length - 4] - offsetDirection[side][0] * RELATION_SYMBOLS[relation.type].FromSymbol.offset.width*arrowLengthFactorFrom;
         points[points.length - 3] = points[points.length - 3] + offsetDirection[side][1] * RELATION_SYMBOLS[relation.type].FromSymbol.offset.height*arrowLengthFactorFrom;
         points[points.length - 2] = points[points.length - 2] + offsetDirection[side][0] * RELATION_SYMBOLS[relation.type].ToSymbol.offset.width*arrowLengthFactorTo;
