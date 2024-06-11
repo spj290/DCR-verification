@@ -15,7 +15,10 @@ function TestsSidebar({ tests, setTests }) {
   });
 
   function  testClick(test) {
-    setFormState({showTestForm: !formState.showTestForm, newTestName: test.name, newPolarity: test.polarity, selectedContextEvents: test.context})
+    const showTest = !formState.showTestForm
+    setFormState({showTestForm: showTest, newTestName: test.name, newPolarity: test.polarity, selectedContextEvents: test.context})
+    console.log(formState.showTestForm)
+    console.log(formState)
   }
 
   function deleteTest(testName) {
@@ -26,8 +29,8 @@ function TestsSidebar({ tests, setTests }) {
     const updatedTests = tests.filter(
       (test) => test.name !== testName
     );
-    // setTests(updatedTests)
-    setTests({})
+    setTests(updatedTests)
+    // setTests({})
     // const index = tests.indexOf(test);
     // if (index > -1) {
     //   tests.splice(index, 1); 
@@ -51,7 +54,6 @@ function TestsSidebar({ tests, setTests }) {
         formState={formState}
         setFormState={setFormState}
         deleteTest={deleteTest}
-        setTests={setTests}
       />
 
 

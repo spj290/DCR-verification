@@ -3,7 +3,7 @@ import React from "react";
 // import Events from "./Events";
 // import Relations from "./Relations";
 
-function TestInfoWindow({formState, setFormState, deleteTest, setTests}) {
+function TestInfoWindow({formState, setFormState, deleteTest}) {
   function closeForm() {
     setFormState((prevState) => ({
       ...prevState,
@@ -27,7 +27,7 @@ function TestInfoWindow({formState, setFormState, deleteTest, setTests}) {
             X
           </button>
           <button
-            onClick={deleteTest(formState.newTestName)}
+            onClick={() => deleteTest(formState.newTestName)}
             style={{
                 position:"absolute",
                 top: 0,
