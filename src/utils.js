@@ -6,6 +6,9 @@ export function convertToDCRGraph(events, relations) {
         return event.label;
       })
     );
+    const pendingSet = new Set(events.filter(event => event.marking.pending).map(event => event.label));
+    const includedSet = new Set(events.filter(event => event.marking.included).map(event => event.label));
+    const execudedSet = new Set(events.filter(event => event.marking.executed).map(event => event.label));
 
     const relationTypes = {
       conditionsFor: {},
@@ -30,7 +33,7 @@ export function convertToDCRGraph(events, relations) {
     };
 
     relations.map((relation) => {
-      if (relation.type == RELATION_TYPES.CONDITION) 
+      if (relation.type == RELATION_TYPES.CONDITION || relation.type == RELATION_TYPES.MILESTONE) 
         relationsMap[relation.type][relation.toEvent.label].add(
           relation.fromEvent.label
     );
@@ -43,9 +46,9 @@ export function convertToDCRGraph(events, relations) {
       events: eventLabelSet,
       ...relationTypes,
       marking: {
-        executed: new Set(),
-        included: eventLabelSet,
-        pending: new Set(),
+        executed: execudedSet, 
+        included: includedSet,
+        pending: pendingSet, 
       },
     };
   }

@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { execute, getEnabled } from "../../BitDCRAlign-main/src/bitAlign";
+import {
+  execute,
+  getEnabled,
+  isAccepting,
+} from "../../BitDCRAlign-main/src/bitAlign";
 import {
   bitDCRtoLabelDCR,
   bitGraphToGraphPP,
@@ -24,11 +28,16 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
         : getEnabled(dcrToBitDCR(convertToDCRGraph(events, relations))),
   });
   const [simulationValid, setsimulationValid] = useState(true);
+  const [acceptingState, setAcceptingState] = useState(
+    events.length == 0
+      ? true
+      : isAccepting(dcrToBitDCR(simulatorState.currDCRGraph))
+  );
 
   const [formState, setFormState] = useState({
     showEventForm: false,
     newEventName: "",
-    newEventType: "",
+    marking: { pending: false, included: true, executed: false },
     showTestForm: false,
     newTestName: "",
     newPolarity: "+",
@@ -39,6 +48,7 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
     setTrace([...trace, event.label]);
     if (!simulationValid) return;
     if (!simulatorState.enabledEvents.has(event.label)) {
+      setAcceptingState(false);
       setsimulationValid(false);
       return;
     }
@@ -55,6 +65,7 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
       excludesFor,
       ...DCRGraph
     } = graph;
+    setAcceptingState(isAccepting(DCRGraph));
     setSimulatorState({
       currDCRGraph: bitToRegularDCR(DCRGraph),
       enabledEvents: getEnabled(DCRGraph),
@@ -74,6 +85,11 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
           ? new Set()
           : getEnabled(dcrToBitDCR(convertToDCRGraph(events, relations))),
     });
+    setAcceptingState(
+      events.length == 0
+        ? true
+        : isAccepting(dcrToBitDCR(simulatorState.currDCRGraph))
+    );
     setCustomEvents([]);
     setsimulationValid(true);
     setTrace([]);
@@ -90,11 +106,7 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
         name: formState.newTestName,
         polarity: formState.newPolarity,
         trace: trace,
-        context: new Set(
-          simulatorEvents.map((event) => {
-            return event.label;
-          })
-        ),
+        context: formState.selectedContextEvents,
         status: true,
       },
     ]);
@@ -139,15 +151,16 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
 
   return (
     <div className="simulator">
-      <div className="simulator-canvas">
+      <div
+        className="simulator-canvas"
+        style={{ border: `2px solid ${acceptingState ? "#90EE90" : "red"}` }}
+      >
         {trace.map((event, index) => (
           <div key={index}>{event}</div>
         ))}
       </div>
-      <div>
-        {testsActive ? (
-          <TestsSidebar tests={tests} />
-        ) : (
+      <div className="sidebar-container">
+        <div>
           <SimulatorSidebar
             simulatorEvents={simulatorEvents}
             customEvents={customEvents}
@@ -159,21 +172,22 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
             addTest={addTest}
             addCustomEvent={addCustomEvent}
           />
-        )}
+          <AddEventForm
+            formState={formState}
+            setFormState={setFormState}
+            handleAddEventSubmit={handleAddEventSubmit}
+          />
+          <AddTestForm
+            simulatorEvents={simulatorEvents}
+            customEvents={customEvents}
+            formState={formState}
+            setFormState={setFormState}
+            handleAddTestSubmit={handleAddTestSubmit}
+            handleContextEventChange={handleContextEventChange}
+          />
+        </div>
+        {testsActive && <TestsSidebar tests={tests} />}
       </div>
-      <AddEventForm
-        formState={formState}
-        setFormState={setFormState}
-        handleAddEventSubmit={handleAddEventSubmit}
-      />
-      <AddTestForm
-        simulatorEvents={simulatorEvents}
-        customEvents={customEvents}
-        formState={formState}
-        setFormState={setFormState}
-        handleAddTestSubmit={handleAddTestSubmit}
-        handleContextEventChange={handleContextEventChange}
-      />
     </div>
   );
 }
