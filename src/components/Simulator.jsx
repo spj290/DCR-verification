@@ -161,7 +161,9 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
       </div>
       <div>
         {testsActive ? (
-          <TestsSidebar tests={tests} />
+          <TestsSidebar 
+            tests={tests}
+            setTests={setTests} />
         ) : (
           <SimulatorSidebar
             simulatorEvents={simulatorEvents}
