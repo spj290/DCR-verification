@@ -55,11 +55,12 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
           topLeftX + selfshift,
           topLeftY - ringRadius, // Goes up
           topLeftX + ringRadius + selfshift,
-          topLeftY - ringRadius, // Goes right
+          topLeftY - ringRadius - RELATION_SYMBOLS[type].FromSymbol.offset.height, // Goes left {NOTE} Added offset from symbol to make it look better
           topLeftX + ringRadius + selfshift,
           topLeftY, // Ending point (goes down)
         ],
-        side: "top",
+        side: "bottom", // Normally an arrow that hits the top of a box would originate from the bottom of a box
+                        // Since this is a self-relation, we will pass the origin side as bottom even though it originates from the top
       }
     }
 
@@ -133,12 +134,13 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
           y: points[points.length - 1]+toOffsetY*offsetDirection[side][1],
         };
 
-    
-        // shortening the arrow by symbol's width and height to prevent overlap
-        points[points.length - 4] = points[points.length - 4] - offsetDirection[side][0] * RELATION_SYMBOLS[relation.type].FromSymbol.offset.width;
-        points[points.length - 3] = points[points.length - 3] + offsetDirection[side][1] * RELATION_SYMBOLS[relation.type].FromSymbol.offset.height;
-        points[points.length - 2] = points[points.length - 2] + offsetDirection[side][0] * RELATION_SYMBOLS[relation.type].ToSymbol.offset.width;
-        points[points.length - 1] = points[points.length - 1] - offsetDirection[side][1] * RELATION_SYMBOLS[relation.type].ToSymbol.offset.height;
+        
+        const arrowLengthFactorFrom = 1; // Change this to adjust the length of the arrow. Greater value means shorter arrow from origin
+        const arrowLengthFactorTo = 1; // Change this to adjust the length of the arrow. Greater value means shorter arrow from destination
+        points[points.length - 4] = points[points.length - 4] - offsetDirection[side][0] * RELATION_SYMBOLS[relation.type].FromSymbol.offset.width*arrowLengthFactorFrom;
+        points[points.length - 3] = points[points.length - 3] + offsetDirection[side][1] * RELATION_SYMBOLS[relation.type].FromSymbol.offset.height*arrowLengthFactorFrom;
+        points[points.length - 2] = points[points.length - 2] + offsetDirection[side][0] * RELATION_SYMBOLS[relation.type].ToSymbol.offset.width*arrowLengthFactorTo;
+        points[points.length - 1] = points[points.length - 1] - offsetDirection[side][1] * RELATION_SYMBOLS[relation.type].ToSymbol.offset.height*arrowLengthFactorTo;
 
         return (
           <React.Fragment key={relation.id}>
@@ -152,7 +154,7 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
             <Text
               x={FromSymbolPos.x}
               y={FromSymbolPos.y}
-              text={RELATION_SYMBOLS[relation.type].FromSymbol.symbol} // Replace with your desired character
+              text={RELATION_SYMBOLS[relation.type].FromSymbol.symbol}
               align = "center"
               verticalAlign = "middle"
               fontSize={RELATION_SYMBOLS[relation.type].FromSymbol.offset.size}
@@ -164,7 +166,7 @@ function Relations({ relations, setArrowEndpoints, handleRelationClick }) {
             <Text
               x={ToSymbolPos.x}
               y={ToSymbolPos.y}
-              text={RELATION_SYMBOLS[relation.type].ToSymbol.symbol} // Replace with your desired character
+              text={RELATION_SYMBOLS[relation.type].ToSymbol.symbol}
               align='center'
               verticalAlign='middle'
               fontSize={RELATION_SYMBOLS[relation.type].ToSymbol.offset.size}
