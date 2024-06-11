@@ -153,7 +153,7 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
     <div className="simulator">
       <div
         className="simulator-canvas"
-        style={{ border: `2px solid ${acceptingState ? "green" : "red"}` }}
+        style={{ border: `2px solid ${acceptingState ? "#90EE90" : "red"}` }}
       >
         {trace.map((event, index) => (
           <div key={index}>{event}</div>
