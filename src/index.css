@@ -12,6 +12,7 @@ body {
 .app {
   display: flex;
   flex-direction: row;
+  height: 88vh;
 }
 
 .simulator {
@@ -171,4 +172,9 @@ body {
 .default-button-style:hover {
   background-color: #1e293b;
   color: #fff;
+}
+
+
+.sidebar-container {
+  display: flex;
 }

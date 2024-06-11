@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/addeventform.css";
 
 function AddTestForm({
   simulatorEvents,
@@ -21,16 +22,12 @@ function AddTestForm({
         <form onSubmit={handleAddTestSubmit} className="simulator-form">
           <button
             onClick={closeForm}
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              backgroundColor: "red",
-            }}
+            className="close--button"
           >
-            X
+            <span class="close-icon">&times;</span>
           </button>
           <input
+            className="input--field"
             type="text"
             placeholder="Test Name"
             value={formState.newTestName}
@@ -44,6 +41,7 @@ function AddTestForm({
           />
           <label>
             <input
+              className="input-field--checkbox"
               type="radio"
               name="polarity"
               value="+"
@@ -55,7 +53,7 @@ function AddTestForm({
                 }))
               }
             />
-            +
+            <span>+</span>
           </label>
           <label>
             <input
@@ -70,7 +68,7 @@ function AddTestForm({
                 }))
               }
             />
-            -
+            <span> -</span>
           </label>
           <p>Select context events:</p>
           <div className="event-list context-list">
@@ -85,7 +83,7 @@ function AddTestForm({
               </div>
             ))}
           </div>
-          <button type="submit">Add Test</button>
+          <button type="submit" className="button-submit">Add Test</button>
         </form>
       )}
     </>

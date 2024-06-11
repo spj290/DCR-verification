@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Simulator from "./components/Simulator";
 import GraphEditor from "./components/GraphEditor";
 import { useState, useEffect } from "react";
-import FileManager from "./components/FileManager";
 import { convertToDCRGraph } from "./utils";
 import checkAlignment from "../BitDCRAlign-main/src/tdm";
 import Navbar from "./components/Navbar";
@@ -27,7 +26,7 @@ function App() {
 
   // Every time the events or relations state changes, save it to local storage
   useEffect(() => {
-    if (events.length > 0) {
+    if (events.length > 0 || relations.length > 0) {
       localStorage.setItem("events", JSON.stringify(events));
       localStorage.setItem("relations", JSON.stringify(relations));
       console.log("Events and relations saved to local storage");

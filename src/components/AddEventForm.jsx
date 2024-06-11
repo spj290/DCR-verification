@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/addeventform.css";
 
 function AddEventForm({ formState, setFormState, handleAddEventSubmit }) {
   function closeForm() {
@@ -12,17 +13,13 @@ function AddEventForm({ formState, setFormState, handleAddEventSubmit }) {
       {formState.showEventForm && (
         <form onSubmit={handleAddEventSubmit} className="simulator-form">
           <button
+            className="close--button"
             onClick={closeForm}
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              backgroundColor: "red",
-            }}
           >
-            X
+            <span class="close-icon">&times;</span>
           </button>
           <input
+            className="input--field"
             type="text"
             placeholder="Event Name"
             value={formState.newEventName}
@@ -36,6 +33,7 @@ function AddEventForm({ formState, setFormState, handleAddEventSubmit }) {
           />
           <label>
             <input
+              className="input-field--checkbox"
               type="checkbox"
               checked={formState.marking.pending}
               onChange={() =>
@@ -82,7 +80,7 @@ function AddEventForm({ formState, setFormState, handleAddEventSubmit }) {
             />
             Executed
           </label>
-          <button type="submit">Add Event</button>
+          <button className="button-submit" type="submit">Add Event</button>
         </form>
       )}
     </>

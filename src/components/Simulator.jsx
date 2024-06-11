@@ -153,18 +153,14 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
     <div className="simulator">
       <div
         className="simulator-canvas"
-        style={{ border: `2px solid ${acceptingState ? "green" : "red"}` }}
+        style={{ border: `2px solid ${acceptingState ? "#90EE90" : "red"}` }}
       >
         {trace.map((event, index) => (
           <div key={index}>{event}</div>
         ))}
       </div>
-      <div>
-        {testsActive ? (
-          <TestsSidebar 
-            tests={tests}
-            setTests={setTests} />
-        ) : (
+      <div className="sidebar-container">
+        <div>
           <SimulatorSidebar
             simulatorEvents={simulatorEvents}
             customEvents={customEvents}
@@ -176,21 +172,24 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
             addTest={addTest}
             addCustomEvent={addCustomEvent}
           />
-        )}
+          <AddEventForm
+            formState={formState}
+            setFormState={setFormState}
+            handleAddEventSubmit={handleAddEventSubmit}
+          />
+          <AddTestForm
+            simulatorEvents={simulatorEvents}
+            customEvents={customEvents}
+            formState={formState}
+            setFormState={setFormState}
+            handleAddTestSubmit={handleAddTestSubmit}
+            handleContextEventChange={handleContextEventChange}
+          />
+        </div>
+        {testsActive && <TestsSidebar 
+            tests={tests}
+            setTests={setTests} />}
       </div>
-      <AddEventForm
-        formState={formState}
-        setFormState={setFormState}
-        handleAddEventSubmit={handleAddEventSubmit}
-      />
-      <AddTestForm
-        simulatorEvents={simulatorEvents}
-        customEvents={customEvents}
-        formState={formState}
-        setFormState={setFormState}
-        handleAddTestSubmit={handleAddTestSubmit}
-        handleContextEventChange={handleContextEventChange}
-      />
     </div>
   );
 }
