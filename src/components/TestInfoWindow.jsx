@@ -26,6 +26,9 @@ function TestInfoWindow({formState, setFormState, deleteTest}) {
           >
             X
           </button>
+          <h3>
+            Polarity: {formState.newPolarity === "+"? "+":"-"}
+          </h3>
           <button
             onClick={() => deleteTest(formState.newTestName)}
             style={{
@@ -36,17 +39,23 @@ function TestInfoWindow({formState, setFormState, deleteTest}) {
             >
                 Delete Test
           </button>
+          <div>
+            <h3>
+                Context Events:
+            </h3>
           <div
             style={{ whiteSpace: 'pre-line' }}
             >
             {[...formState.selectedContextEvents].join('\n')}
-            {/* {[formState.selectedContextEvents].map((event, index) => (
-                <div key={index}>{event}</div>
-                ))} */}
-            {/* {trace.map((event, index) => (
-            <div key={index}>{event}</div>
-            ))} */}
             </div>
+          </div>
+          <div>
+            <h3>Trace:</h3>
+            <div style={{ whiteSpace: 'pre-line' }}>
+            {[...formState.trace].join('\n')}
+            </div>
+          </div>
+            
           {/* <Stage
             className="canvas"
             width={500}

@@ -12,11 +12,12 @@ function TestsSidebar({ tests, setTests }) {
     newTestName: "",
     newPolarity: "+",
     selectedContextEvents: new Set(),
+    trace: []
   });
 
   function  testClick(test) {
     const showTest = !formState.showTestForm
-    setFormState({showTestForm: showTest, newTestName: test.name, newPolarity: test.polarity, selectedContextEvents: test.context})
+    setFormState({showTestForm: showTest, newTestName: test.name, newPolarity: test.polarity, selectedContextEvents: test.context, trace:test.trace})
     console.log(formState.showTestForm)
     console.log(formState)
   }
