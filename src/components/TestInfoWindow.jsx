@@ -1,7 +1,11 @@
 import React from "react";
+import Draggable from "react-draggable";
 // import { Stage, Layer } from "react-konva";
 // import Events from "./Events";
 // import Relations from "./Relations";
+
+
+import "../styles/testwindowinfo.css";
 
 function TestInfoWindow({formState, setFormState, deleteTest}) {
   function closeForm() {
@@ -14,64 +18,57 @@ function TestInfoWindow({formState, setFormState, deleteTest}) {
   return (
     <>
       {formState.showTestForm && (
-        <form className="test-form">
-          <button
-            onClick={closeForm}
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              backgroundColor: "red",
-            }}
-          >
-            X
-          </button>
-          <h3>
-            Polarity: {formState.newPolarity === "+"? "+":"-"}
-          </h3>
-          <button
-            onClick={() => deleteTest(formState.newTestName)}
-            style={{
-                position:"absolute",
-                top: 0,
-                left: 0
-            }}
+        <Draggable>
+          <form className="test-form">
+            <button
+              onClick={closeForm}
+              className="close--button"
             >
-                Delete Test
-          </button>
-          <div>
+              <span class="close-icon">&times;</span>
+            </button>
             <h3>
-                Context Events:
+              Polarity: {formState.newPolarity === "+"? "+":"-"}
             </h3>
-          <div
-            style={{ whiteSpace: 'pre-line' }}
-            >
-            {[...formState.selectedContextEvents].join('\n')}
+            <div>
+              <h3>
+                  Context Events:
+              </h3>
+            <div
+              style={{ whiteSpace: 'pre-line' }}
+              >
+              {[...formState.selectedContextEvents].join('\n')}
+              </div>
             </div>
-          </div>
-          <div>
-            <h3>Trace:</h3>
-            <div style={{ whiteSpace: 'pre-line' }}>
-            {[...formState.trace].join('\n')}
+            <div>
+              <h3>Trace:</h3>
+              <div style={{ whiteSpace: 'pre-line' }}>
+              {[...formState.trace].join('\n')}
+              </div>
             </div>
-          </div>
+            <button
+              onClick={() => deleteTest(formState.newTestName)}
+              className="button--delete"
+              >
+                  Delete Test
+            </button>
+              
+            {/* <Stage
+              className="canvas"
+              width={500}
+              height={500}
+              draggable
+              // onClick={handleStageClick()}
+              // onContextMenu={addEvent}>
+              >
+              {/* <Layer>
+                  <Events
+                  events={[formState.selectedContextEvents]}
+                  // setEvents={setEvents}
+                  />
+              </Layer> </Stage> */}
             
-          {/* <Stage
-            className="canvas"
-            width={500}
-            height={500}
-            draggable
-            // onClick={handleStageClick()}
-            // onContextMenu={addEvent}>
-            >
-            {/* <Layer>
-                <Events
-                events={[formState.selectedContextEvents]}
-                // setEvents={setEvents}
-                />
-            </Layer> </Stage> */}
-          
-        </form>
+          </form>
+        </Draggable>
       )}
     </>
   );

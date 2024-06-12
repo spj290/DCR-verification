@@ -1,5 +1,7 @@
 import React from "react";
+import Draggable from "react-draggable";
 import "../styles/addeventform.css";
+
 
 function AddEventForm({ formState, setFormState, handleAddEventSubmit }) {
   function closeForm() {
@@ -9,9 +11,12 @@ function AddEventForm({ formState, setFormState, handleAddEventSubmit }) {
     }));
   }
   return (
+
     <>
+    
       {formState.showEventForm && (
-        <form onSubmit={handleAddEventSubmit} className="simulator-form">
+        <Draggable>
+        <form onSubmit={handleAddEventSubmit} className="simulator-form-2">
           <button
             className="close--button"
             onClick={closeForm}
@@ -82,6 +87,7 @@ function AddEventForm({ formState, setFormState, handleAddEventSubmit }) {
           </label>
           <button className="button-submit" type="submit">Add Event</button>
         </form>
+      </Draggable>
       )}
     </>
   );

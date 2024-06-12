@@ -178,3 +178,17 @@ body {
 .sidebar-container {
   display: flex;
 }
+
+
+.close--button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 20%;
+  border: none;
+}
+
+.close--button:hover {
+  background-color: lightcoral;
+  color: white;
+}
