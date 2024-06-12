@@ -73,6 +73,7 @@ function App() {
               setRelations={setRelations}
               testsActive={testsActive}
               tests={tests}
+              setTests={setTests}
             />
           }
         />
