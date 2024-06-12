@@ -186,7 +186,9 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
             handleContextEventChange={handleContextEventChange}
           />
         </div>
-        {testsActive && <TestsSidebar tests={tests} />}
+        {testsActive && <TestsSidebar 
+            tests={tests}
+            setTests={setTests} />}
       </div>
     </div>
   );
