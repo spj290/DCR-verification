@@ -6,6 +6,10 @@ function DropDownMenu({
   setEvents,
   relations,
   setRelations,
+  tests,
+  setTests,
+  testsActive,
+  setTestsActive,
   className,
   onMouseLeave,
 }) {
@@ -13,6 +17,9 @@ function DropDownMenu({
     console.log("Resetting events and relations");
     setEvents([]);
     setRelations([]);
+    setTests([]);
+    setTestsActive(false);
+    localStorage.clear();
   }
 
   return (

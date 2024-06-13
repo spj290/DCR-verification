@@ -24,6 +24,17 @@ function GraphEditor({
       return event;
     });
     setEvents(updatedEvents);
+    // update relations with new label
+    const updatedRelations = relations.map((relation) => {
+      if (relation.fromEvent.id === eventId) {
+        return { ...relation, fromEvent: { ...relation.fromEvent, label: newLabel } };
+      }
+      if (relation.toEvent.id === eventId) {
+        return { ...relation, toEvent: { ...relation.toEvent, label: newLabel } };
+      }
+      return relation;
+    });
+    setRelations(updatedRelations);
   }
 
   return (

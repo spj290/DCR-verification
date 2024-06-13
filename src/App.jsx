@@ -17,6 +17,7 @@ function App() {
     const savedEvents = localStorage.getItem("events");
     const savedRelations = localStorage.getItem("relations");
     const savedTests = localStorage.getItem("tests");
+    const savedTestsActive = localStorage.getItem("testsActive");
 
     if (savedEvents) {
       setEvents(JSON.parse(savedEvents));
@@ -25,19 +26,35 @@ function App() {
       setRelations(JSON.parse(savedRelations));
     }
     if (savedTests) {
-      setTests(JSON.parse(savedTests));
+      const parsedTests = JSON.parse(savedTests);
+      parsedTests.forEach((test) => {
+        test.context = new Set(test.context);
+      });
+      setTests(parsedTests);
     }
+    if (savedTestsActive) {
+      setTestsActive(JSON.parse(savedTestsActive));
+    }
+    console.log("Events, relations and tests loaded from local storage");
   }, []);
 
-  // Every time the events or relations state changes, save it to local storage
+  // Every time the events, relations, test or testsActive, state changes, save it to local storage
   useEffect(() => {
     if (events.length > 0 || relations.length > 0) {
       localStorage.setItem("events", JSON.stringify(events));
       localStorage.setItem("relations", JSON.stringify(relations));
-      localStorage.setItem("tests", JSON.stringify(tests));
+      // tests.context is a Set, which is not serializable, so we need to convert it to an array
+      const convertedTests = tests.map((test) => {
+        return {
+          ...test,
+          context: Array.from(test.context),
+        };
+      });
+      localStorage.setItem("tests", JSON.stringify(convertedTests));
+      localStorage.setItem("testsActive", JSON.stringify(testsActive));
       console.log("Events, relations and tests saved to local storage");
     }
-  }, [events, relations, tests]);
+  }, [events, relations, tests , testsActive]);
 
   useEffect(() => {
     const eventLabels = events.map((event) => event.label);

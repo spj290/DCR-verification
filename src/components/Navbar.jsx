@@ -39,6 +39,8 @@ function Navbar({
             className={openDropdown ? "dropdown-open" : "dropdown-close"}
             setEvents={setEvents}
             setRelations={setRelations}
+            setTests={setTests}
+            setTestsActive={setTestsActive}
           />
         )}
       </div>
@@ -61,8 +63,12 @@ function Navbar({
       <FileManager
         events={events}
         relations={relations}
+        tests={tests}
+        testsActive={testsActive}
         setEvents={setEvents}
         setRelations={setRelations}
+        setTests={setTests}
+        setTestsActive={setTestsActive}
       />
     </nav>
   );
