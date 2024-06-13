@@ -16,11 +16,16 @@ function App() {
   useEffect(() => {
     const savedEvents = localStorage.getItem("events");
     const savedRelations = localStorage.getItem("relations");
+    const savedTests = localStorage.getItem("tests");
+
     if (savedEvents) {
       setEvents(JSON.parse(savedEvents));
     }
     if (savedRelations) {
       setRelations(JSON.parse(savedRelations));
+    }
+    if (savedTests) {
+      setTests(JSON.parse(savedTests));
     }
   }, []);
 
@@ -29,21 +34,23 @@ function App() {
     if (events.length > 0 || relations.length > 0) {
       localStorage.setItem("events", JSON.stringify(events));
       localStorage.setItem("relations", JSON.stringify(relations));
-      console.log("Events and relations saved to local storage");
+      localStorage.setItem("tests", JSON.stringify(tests));
+      console.log("Events, relations and tests saved to local storage");
     }
-  }, [events, relations]);
+  }, [events, relations, tests]);
 
   useEffect(() => {
+    const eventLabels = events.map((event) => event.label);
     const intervalId = setInterval(() => {
       setTests(
-        tests.map((test) => ({
-          ...test,
-          status: checkAlignment(
-            test,
-            convertToDCRGraph(events, relations),
-            10
-          ),
-        }))
+        tests.map((test) => {
+          return {
+            ...test,
+            status:
+              test.trace.every((element) => eventLabels.includes(element)) &&
+              checkAlignment(test, convertToDCRGraph(events, relations), 10),
+          };
+        })
       );
     }, 10000);
 

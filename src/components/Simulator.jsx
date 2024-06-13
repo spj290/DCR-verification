@@ -29,7 +29,7 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
   });
   const [simulationValid, setsimulationValid] = useState(true);
   const [acceptingState, setAcceptingState] = useState(
-    events.length == 0
+    simulatorState.currDCRGraph.events.size === 0
       ? true
       : isAccepting(dcrToBitDCR(simulatorState.currDCRGraph))
   );
@@ -186,9 +186,7 @@ function Simulator({ events, relations, tests, setTests, testsActive }) {
             handleContextEventChange={handleContextEventChange}
           />
         </div>
-        {testsActive && <TestsSidebar 
-            tests={tests}
-            setTests={setTests} />}
+        {testsActive && <TestsSidebar tests={tests} setTests={setTests} />}
       </div>
     </div>
   );
