@@ -1,0 +1,21 @@
+.button--delete {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(255, 74, 74);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.test-form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin-right: 10px;
+    box-shadow: 1px 1px 5px rgba(166, 175, 195, 0.5);
+    position: absolute;
+    top: 90px;
+    left: 34vw;
+}

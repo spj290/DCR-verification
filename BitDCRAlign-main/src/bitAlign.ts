@@ -29,7 +29,7 @@ export const execute = (event: Event, graph: BitLabelDCRPP) => {
     // Add sink of all include relations to included
     graph.marking.included.union(graph.includesTo[event]);
 };
-const isAccepting = (graph: BitDCRGraph): boolean => {
+export const isAccepting = (graph: BitDCRGraph): boolean => {
     // Graph is accepting if the intersections between pending and included events is empty
     return graph.marking.pending.copy().intersect(graph.marking.included).isEmpty();
 };

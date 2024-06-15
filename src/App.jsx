@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Simulator from "./components/Simulator";
 import GraphEditor from "./components/GraphEditor";
 import { useState, useEffect } from "react";
-import FileManager from "./components/FileManager";
 import { convertToDCRGraph } from "./utils";
 import checkAlignment from "../BitDCRAlign-main/src/tdm";
 import Navbar from "./components/Navbar";
@@ -17,34 +16,58 @@ function App() {
   useEffect(() => {
     const savedEvents = localStorage.getItem("events");
     const savedRelations = localStorage.getItem("relations");
+    const savedTests = localStorage.getItem("tests");
+    const savedTestsActive = localStorage.getItem("testsActive");
+
     if (savedEvents) {
       setEvents(JSON.parse(savedEvents));
     }
     if (savedRelations) {
       setRelations(JSON.parse(savedRelations));
     }
+    if (savedTests) {
+      const parsedTests = JSON.parse(savedTests);
+      parsedTests.forEach((test) => {
+        test.context = new Set(test.context);
+      });
+      setTests(parsedTests);
+    }
+    if (savedTestsActive) {
+      setTestsActive(JSON.parse(savedTestsActive));
+    }
+    console.log("Events, relations and tests loaded from local storage");
   }, []);
 
-  // Every time the events or relations state changes, save it to local storage
+  // Every time the events, relations, test or testsActive, state changes, save it to local storage
   useEffect(() => {
-    if (events.length > 0) {
+    if (events.length > 0 || relations.length > 0) {
       localStorage.setItem("events", JSON.stringify(events));
       localStorage.setItem("relations", JSON.stringify(relations));
-      console.log("Events and relations saved to local storage");
+      // tests.context is a Set, which is not serializable, so we need to convert it to an array
+      const convertedTests = tests.map((test) => {
+        return {
+          ...test,
+          context: Array.from(test.context),
+        };
+      });
+      localStorage.setItem("tests", JSON.stringify(convertedTests));
+      localStorage.setItem("testsActive", JSON.stringify(testsActive));
+      console.log("Events, relations and tests saved to local storage");
     }
-  }, [events, relations]);
+  }, [events, relations, tests , testsActive]);
 
   useEffect(() => {
+    const eventLabels = events.map((event) => event.label);
     const intervalId = setInterval(() => {
       setTests(
-        tests.map((test) => ({
-          ...test,
-          status: checkAlignment(
-            test,
-            convertToDCRGraph(events, relations),
-            10
-          ),
-        }))
+        tests.map((test) => {
+          return {
+            ...test,
+            status:
+              test.trace.every((element) => eventLabels.includes(element)) &&
+              checkAlignment(test, convertToDCRGraph(events, relations), 10),
+          };
+        })
       );
     }, 10000);
 
@@ -74,6 +97,7 @@ function App() {
               setRelations={setRelations}
               testsActive={testsActive}
               tests={tests}
+              setTests={setTests}
             />
           }
         />

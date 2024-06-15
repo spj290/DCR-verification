@@ -3,7 +3,7 @@ import Relations from "./Relations";
 import React, { useRef, useState } from "react";
 import "../styles/filemanager.css";
 
-function FileManager({ events, relations, setEvents, setRelations }) {
+function FileManager({ events, relations, tests, testsActive, setEvents, setRelations, setTests, setTestsActive}) {
   const fileInputRef = useRef(null);
   const [fileName, setFileName] = useState("dcr.json");
 
@@ -23,7 +23,15 @@ function FileManager({ events, relations, setEvents, setRelations }) {
     const state = {
       events,
       relations,
+      tests,
+      testsActive,
     };
+    // tests.context is a Set, which is not serializable
+    // Convert it to an array before saving
+    state.tests = state.tests.map((test) => ({
+      ...test,
+      context: Array.from(test.context),
+    }));
     const fileContent = JSON.stringify(state);
 
     if ("showSaveFilePicker" in window) {
@@ -63,8 +71,15 @@ function FileManager({ events, relations, setEvents, setRelations }) {
     const reader = new FileReader();
     reader.onload = (e) => {
       const state = JSON.parse(e.target.result);
+      // Convert context from array to Set
+      state.tests = state.tests.map((test) => ({
+        ...test,
+        context: new Set(test.context),
+      }));
       setEvents(state.events);
       setRelations(state.relations);
+      setTests(state.tests);
+      setTestsActive(state.testsActive);
     };
     reader.readAsText(file);
   };

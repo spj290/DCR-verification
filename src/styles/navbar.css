@@ -46,3 +46,9 @@
   background-color: #1e293b;
   color: #fff;
 }
+
+/* Define the active link style with an epic animation */
+.links.active {
+  background-color: #1e293b;
+  color: #fff;
+}

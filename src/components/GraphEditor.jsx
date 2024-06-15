@@ -11,6 +11,7 @@ function GraphEditor({
   setRelations,
   testsActive,
   tests,
+  setTests
 }) {
   const [sidebarActive, setSidebarActive] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
@@ -23,6 +24,17 @@ function GraphEditor({
       return event;
     });
     setEvents(updatedEvents);
+    // update relations with new label
+    const updatedRelations = relations.map((relation) => {
+      if (relation.fromEvent.id === eventId) {
+        return { ...relation, fromEvent: { ...relation.fromEvent, label: newLabel } };
+      }
+      if (relation.toEvent.id === eventId) {
+        return { ...relation, toEvent: { ...relation.toEvent, label: newLabel } };
+      }
+      return relation;
+    });
+    setRelations(updatedRelations);
   }
 
   return (
@@ -40,18 +52,16 @@ function GraphEditor({
           setRelations={setRelations}
         />
       </div>
-      <div>
-        {testsActive ? (
-          <TestsSidebar tests={tests} />
-        ) : (
-          sidebarActive && (
-            <RightSidebar
-              selectedEventId={selectedEventId}
-              events={events}
-              updateEventLabel={updateEventLabel}
-            />
-          )
+      <div className="sidebar-container">
+        {sidebarActive && (
+          <RightSidebar
+            selectedEventId={selectedEventId}
+            events={events}
+            updateEventLabel={updateEventLabel}
+            setEvents={setEvents}
+          />
         )}
+        {testsActive && <TestsSidebar tests={tests} setTests={setTests}/>}
       </div>
     </div>
   );
